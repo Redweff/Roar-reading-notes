@@ -1,0 +1,2875 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROAR · 女性运动生理学与营养科学交互式导读 | Curated by redweff</title>
+  <!-- Tailwind CSS (Cloudflare Mirror + Official CDN Fallback) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React 18 & ReactDOM 18 (cdnjs Cloudflare Global Mirror - Fast & Reliable in China & Globally) -->
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <!-- Babel Standalone (cdnjs Cloudflare Global Mirror) -->
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+  <style>
+    body {
+      background-color: #111315;
+      color: #f4f4f5;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #111315;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #009CDE;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#111315;color:#00A8E8;font-family:sans-serif;font-weight:bold;">
+      正在加载 ROAR 交互式导读页面...
+    </div>
+  </div>
+
+  <script type="text/babel">
+    const { useState, useMemo, useEffect } = React;
+
+    const createIcon = (paths) => ({ className = 'w-4 h-4', ...props }) => (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        {...props}
+      >
+        {paths}
+      </svg>
+    );
+
+    const Activity = createIcon(<polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />);
+    const Flame = createIcon(<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />);
+    const Droplets = createIcon(<><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></>);
+    const ShieldAlert = createIcon(<><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></>);
+    const Bone = createIcon(<path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z" />);
+    const Brain = createIcon(<><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></>);
+    const HeartPulse = createIcon(<><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></>);
+    const Scale = createIcon(<><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" /><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" /><path d="M7 21h10" /><path d="M12 3v18" /><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" /></>);
+    const Dumbbell = createIcon(<><path d="m6.5 6.5 11 11" /><path d="m21 21-1-1" /><path d="m3 3 1 1" /><path d="m18 22 4-4" /><path d="m2 6 4-4" /><path d="m3 10 7-7" /><path d="m14 21 7-7" /></>);
+    const Sparkles = createIcon(<><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /></>);
+    const CheckCircle2 = createIcon(<><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></>);
+    const AlertTriangle = createIcon(<><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></>);
+    const XCircle = createIcon(<><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></>);
+    const BookOpen = createIcon(<><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></>);
+    const User = createIcon(<><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></>);
+    const ChevronRight = createIcon(<polyline points="9 18 15 12 9 6" />);
+    const Info = createIcon(<><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></>);
+    const RefreshCw = createIcon(<><polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" /><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" /></>);
+    const Award = createIcon(<><circle cx="12" cy="8" r="6" /><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" /></>);
+    const Zap = createIcon(<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />);
+    const Thermometer = createIcon(<path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />);
+    const Moon = createIcon(<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />);
+    const Baby = createIcon(<><path d="M9 12h.01" /><path d="M15 12h.01" /><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" /><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" /></>);
+    const Utensils = createIcon(<><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></>);
+    const Compass = createIcon(<><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></>);
+    const Layers = createIcon(<><polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" /></>);
+    const ArrowRight = createIcon(<><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></>);
+
+// ==========================================
+// 通用原书页码标注组件 (Page Annotation Badge)
+// ==========================================
+const PageBadge = ({ pages, light = false, className = '' }) => (
+  <span
+    title={`对应原书 PDF 第 ${pages} 页`}
+    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-xs font-mono font-bold tracking-wider uppercase transition-all select-none shrink-0 ${
+      light
+        ? 'bg-[#009CDE]/15 text-[#0077A8] border border-[#009CDE]/40'
+        : 'bg-[#00A8E8]/20 text-[#38BDF8] border border-[#00A8E8]/40 shadow-[0_0_10px_rgba(0,168,232,0.15)]'
+    } ${className}`}
+  >
+    <BookOpen className="w-3 h-3" />
+    <span>[P.{pages}]</span>
+  </span>
+);
+
+// ==========================================
+// 原书标志性 ROAR >>> SOUND BITES 模块组件
+// ==========================================
+const RoarSoundBites = ({ title = 'ROAR SOUND BITES', page, items }) => (
+  <div className="mt-8 bg-gradient-to-r from-[#111315] via-[#181B1F] to-[#111315] border-l-4 border-[#00A8E8] rounded-r-xl p-6 text-white shadow-xl relative overflow-hidden">
+    <div className="absolute -right-8 -bottom-8 opacity-5 pointer-events-none select-none">
+      <span className="text-9xl font-black tracking-tighter italic">ROAR</span>
+    </div>
+    <div className="flex flex-wrap items-center justify-between gap-4 mb-4 border-b border-zinc-800 pb-3">
+      <div className="flex items-center gap-2">
+        <span className="text-2xl font-black tracking-[0.2em] text-white">ROAR</span>
+        <div className="flex items-center text-[#00A8E8]">
+          <ChevronRight className="w-6 h-6 -mr-3 stroke-[3]" />
+          <ChevronRight className="w-6 h-6 -mr-3 stroke-[3]" />
+          <ChevronRight className="w-6 h-6 stroke-[3]" />
+        </div>
+        <span className="text-sm font-bold tracking-[0.25em] text-zinc-400 uppercase ml-1">
+          SOUND BITES 核心要点 {title !== 'ROAR SOUND BITES' ? `· ${title}` : ''}
+        </span>
+      </div>
+      <PageBadge pages={page} />
+    </div>
+    <ul className="space-y-2.5 relative z-10">
+      {items.map((item, idx) => (
+        <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-zinc-200 leading-relaxed">
+          <span className="text-[#00A8E8] font-bold mt-1">▶</span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+// ==========================================
+// 主应用组件
+// ==========================================
+function App() {
+  // 导航激活模块
+  const [activeTab, setActiveTab] = useState('all');
+
+  // ------------------------------------------
+  // Interactive 1: 28天月经周期生物黑客状态 [P.26-42]
+  // ------------------------------------------
+  const [cycleDay, setCycleDay] = useState(21);
+  const [athleteWeightLb, setAthleteWeightLb] = useState(135);
+  const [weightUnit, setWeightUnit] = useState('lb'); // 'lb' | 'kg'
+
+  const effectiveWeightLb = useMemo(() => {
+    return weightUnit === 'lb' ? Number(athleteWeightLb) || 135 : Math.round((Number(athleteWeightLb) || 61) * 2.20462);
+  }, [athleteWeightLb, weightUnit]);
+
+  const effectiveWeightKg = useMemo(() => {
+    return Math.round((effectiveWeightLb / 2.20462) * 10) / 10;
+  }, [effectiveWeightLb]);
+
+  // 根据第1-28天计算激素水平与生理状态 (复刻 P.27 曲线)
+  const cycleData = useMemo(() => {
+    const d = cycleDay;
+    // Estrogen (雌激素): Day 1-5 低, Day 12-13 排卵前高峰, Day 14 回落, Day 20-23 黄体期次高峰
+    let estrogen = 15;
+    if (d <= 5) estrogen = 15 + d * 2;
+    else if (d <= 13) estrogen = 25 + Math.pow(d - 5, 1.85) * 2.1;
+    else if (d <= 15) estrogen = 90 - (d - 13) * 30;
+    else if (d <= 22) estrogen = 30 + (d - 15) * 7.5;
+    else estrogen = Math.max(15, 82 - (d - 22) * 11);
+
+    // Progesterone (孕酮): Day 1-14 极低, Day 15-23 飙升并超越雌激素, Day 24-28 下降
+    let progesterone = 5;
+    if (d <= 14) progesterone = 5;
+    else if (d <= 22) progesterone = 5 + Math.sin(((d - 14) / 14) * Math.PI) * 90;
+    else progesterone = Math.max(8, 95 - (d - 22) * 14.5);
+
+    // LH (黄体生成素): Day 12-14 剧烈峰值
+    let lh = 18;
+    if (d === 12) lh = 48;
+    if (d === 13) lh = 96;
+    if (d === 14) lh = 55;
+
+    // FSH (促卵泡激素)
+    let fsh = d <= 5 ? 32 : d === 13 ? 52 : 20;
+
+    const isLowHormone = d <= 14;
+    let subPhase = '';
+    let phaseNameEn = '';
+    let summary = '';
+    let trainingAdvice = '';
+
+    if (d <= 5) {
+      subPhase = '月经期 (Menstrual Phase)';
+      phaseNameEn = 'Low-Hormone / Follicular Phase (Days 1–5)';
+      summary = '雌激素与孕酮降至最低谷，身体解除“备孕警报”，所有能量系统全面向运动开放，生理状态最接近男性！Paula Radcliffe 正是在痛经期打破了2002芝加哥马拉松世界纪录 [P.8, P.27]。';
+      trainingAdvice = '黄金高强度与力量爆发期！痛觉敏感度低、恢复快、空间认知能力最强 [P.28, P.31]。非常适合冲击 PR、大重量抗阻训练与高强度间歇 (HIIT)。';
+    } else if (d <= 11) {
+      subPhase = '卵泡增殖期 (Proliferative Phase)';
+      phaseNameEn = 'Low-Hormone / Follicular Phase (Days 6–11)';
+      summary = 'FSH 刺激卵泡成熟，雌激素稳步爬升但孕酮依然处于低位。碳水化合物代谢顺畅，血容量充沛，体温基准较低 [P.26-28]。';
+      trainingAdvice = '最佳力量增益窗口！研究表明在低激素期进行高频次力量训练，肌肉力量增长高达 32%（远超无周期规划组的 13%）[P.137]。';
+    } else if (d <= 14) {
+      subPhase = '排卵高峰期 (Ovulation Surge)';
+      phaseNameEn = 'Ovulation Window (Days 12–14)';
+      summary = '雌激素与黄体生成素 (LH) 迎来陡峭峰值触发排卵 [P.26-27]。此时爆发力极强，但高雌激素与松弛素 (Relaxin) 会增加韧带松弛度。';
+      trainingAdvice = '适合冲击最大力量或耐力测试，但需特别注意落地稳定性与膝关节对齐（预防 ACL 前交叉韧带损伤）[P.22, P.96]。';
+    } else if (d <= 21) {
+      subPhase = '黄体分泌早期 (Early/Mid Luteal Phase)';
+      phaseNameEn = 'High-Hormone / Luteal Phase (Days 15–21)';
+      summary = '孕酮迅速攀升并超越雌激素 [P.26-27]。高雌激素促使身体节省糖原 (Glycogen-sparing) 转向燃烧脂肪；高孕酮使核心体温升高约 0.4-0.5°C，出汗阈值延迟 [P.8-9, P.30]。';
+      trainingAdvice = '稳态有氧耐力表现良好，但突破无氧阈值 (Lactate Threshold) 会感觉更费力。运动中务必提高每小时碳水化合物补充量 [P.29, P.40]。';
+    } else {
+      subPhase = '经前高激素峰值期 (Late Luteal / PMS Phase)';
+      phaseNameEn = 'Peak High-Hormone / PMS Phase (Days 22–28)';
+      summary = '雌激素与孕酮在经前约5天达到双高峰 [P.26]！精氨酸加压素 (AVP) 与醛固酮受体竞争导致血浆容量 (Plasma Volume) 下降高达 8%，体液转移至细胞间隙造成水肿 (Bloating)，孕酮加速肌肉分解 (Catabolism) 并引发中枢神经疲劳 (CNS Fatigue) [P.9, P.29-30]。';
+      trainingAdvice = '如果感觉沉重，请记住：“不是你的体能退步了，而是你的生理期激素在起作用 (It’s not your fitness; it’s your physiology)” [P.9]。重点执行经前7天救援方案与高钠预水合！';
+    }
+
+    const carbPerHour = isLowHormone
+      ? Math.round(effectiveWeightLb * 0.35)
+      : Math.round(effectiveWeightLb * 0.45);
+
+    const dailyProteinMin = Math.round(effectiveWeightLb * 0.9);
+    const dailyProteinMax = Math.round(effectiveWeightLb * 1.0);
+
+    return {
+      estrogen: Math.min(100, Math.round(estrogen)),
+      progesterone: Math.min(100, Math.round(progesterone)),
+      lh: Math.min(100, Math.round(lh)),
+      fsh: Math.min(100, Math.round(fsh)),
+      isLowHormone,
+      subPhase,
+      phaseNameEn,
+      summary,
+      trainingAdvice,
+      carbPerHour,
+      dailyProteinMin,
+      dailyProteinMax
+    };
+  }, [cycleDay, effectiveWeightLb]);
+
+  // ------------------------------------------
+  // Interactive 2: 每日宏量营养素与运动水合计算器 [P.31, P.158-168, P.195-199]
+  // ------------------------------------------
+  const [trainingLoad, setTrainingLoad] = useState('moderate'); // 'light' | 'moderate' | 'endurance' | 'extreme'
+  const [ambientTemp, setAmbientTemp] = useState('warm'); // 'cool' | 'warm'
+
+  const fuelingPlan = useMemo(() => {
+    const lb = effectiveWeightLb;
+    const kg = effectiveWeightKg;
+
+    let carbRange = [1.6, 1.8];
+    let proRange = [0.8, 1.0];
+    let loadLabel = '中/高强度训练 (60–120分钟)';
+
+    if (trainingLoad === 'light') {
+      carbRange = [1.13, 1.4];
+      proRange = [1.0, 1.2]; // 力量/CrossFit或轻松日
+      loadLabel = '力量/爆发力训练 (CrossFit) 或恢复日';
+    } else if (trainingLoad === 'moderate') {
+      carbRange = [1.6, 1.8];
+      proRange = [0.9, 1.1];
+      loadLabel = '中高强度训练 (1–2小时)';
+    } else if (trainingLoad === 'endurance') {
+      carbRange = [2.0, 2.7];
+      proRange = [0.8, 1.0];
+      loadLabel = '耐力训练 (2–5小时，长跑/骑行/铁三)';
+    } else if (trainingLoad === 'extreme') {
+      carbRange = [2.7, 3.1];
+      proRange = [0.9, 1.1];
+      loadLabel = '极限耐力训练 (5小时以上，大铁 Ironman)';
+    }
+
+    const carbsMin = Math.round(lb * carbRange[0]);
+    const carbsMax = Math.round(lb * carbRange[1]);
+    const proMin = Math.round(lb * proRange[0]);
+    const proMax = Math.round(lb * proRange[1]);
+
+    // 每日推荐比例约 40% Carb, 30% Protein, 30% Fat [P.165]
+    const avgCalories = Math.round(((carbsMin + carbsMax) / 2) * 4 + ((proMin + proMax) / 2) * 4) / 0.7;
+    const fatGrams = Math.round((avgCalories * 0.3) / 9);
+
+    // 运动中能量与水合 [P.46, P.180, P.197]
+    const runCalsMin = Math.round(lb * 0.9);
+    const runCalsMax = Math.round(lb * 1.13);
+    const bikeCalsMin = Math.round(lb * 1.3);
+    const bikeCalsMax = Math.round(lb * 1.6);
+
+    const fluidOzPerHour = ambientTemp === 'cool' ? Math.round(lb * 0.1) : Math.round(lb * 0.15);
+    const fluidMlPerHour = Math.round(fluidOzPerHour * 29.57);
+
+    const caffeineMin = Math.round(kg * 2);
+    const caffeineMax = Math.round(kg * 6);
+
+    return {
+      loadLabel,
+      carbsMin,
+      carbsMax,
+      proMin,
+      proMax,
+      fatGrams,
+      totalEstCalories: Math.round(avgCalories),
+      runCalsMin,
+      runCalsMax,
+      bikeCalsMin,
+      bikeCalsMax,
+      fluidOzPerHour,
+      fluidMlPerHour,
+      caffeineMin,
+      caffeineMax
+    };
+  }, [effectiveWeightLb, effectiveWeightKg, trainingLoad, ambientTemp]);
+
+  // ------------------------------------------
+  // Interactive 3: 体型分类 (Somatotype) 与肘宽骨架测量器 [P.82-91]
+  // ------------------------------------------
+  const [selectedSomatotype, setSelectedSomatotype] = useState('mesomorph');
+  const [heightIdx, setHeightIdx] = useState(7); // 默认 5'5" (165cm)
+  const [elbowInch, setElbowInch] = useState(2.45);
+
+  const heightWeightTable = [
+    { ht: `4'10"`, cm: 147, minElbow: 2.25, maxElbow: 2.5, small: '102–111', medium: '109–121', large: '118–131' },
+    { ht: `4'11"`, cm: 150, minElbow: 2.25, maxElbow: 2.5, small: '103–113', medium: '111–123', large: '120–134' },
+    { ht: `5'0"`, cm: 152, minElbow: 2.25, maxElbow: 2.5, small: '104–115', medium: '113–126', large: '122–137' },
+    { ht: `5'1"`, cm: 155, minElbow: 2.25, maxElbow: 2.5, small: '106–118', medium: '115–129', large: '125–140' },
+    { ht: `5'2"`, cm: 157, minElbow: 2.25, maxElbow: 2.5, small: '108–121', medium: '118–132', large: '128–143' },
+    { ht: `5'3"`, cm: 160, minElbow: 2.25, maxElbow: 2.5, small: '111–124', medium: '121–135', large: '131–147' },
+    { ht: `5'4"`, cm: 163, minElbow: 2.375, maxElbow: 2.625, small: '114–127', medium: '124–138', large: '134–151' },
+    { ht: `5'5"`, cm: 165, minElbow: 2.375, maxElbow: 2.625, small: '117–130', medium: '127–141', large: '137–155' },
+    { ht: `5'6"`, cm: 168, minElbow: 2.375, maxElbow: 2.625, small: '120–133', medium: '130–144', large: '140–159' },
+    { ht: `5'7"`, cm: 170, minElbow: 2.375, maxElbow: 2.625, small: '123–136', medium: '133–147', large: '143–163' },
+    { ht: `5'8"`, cm: 173, minElbow: 2.375, maxElbow: 2.625, small: '126–139', medium: '136–150', large: '146–167' },
+    { ht: `5'9"`, cm: 175, minElbow: 2.375, maxElbow: 2.625, small: '129–142', medium: '139–153', large: '149–170' },
+    { ht: `5'10"`, cm: 178, minElbow: 2.375, maxElbow: 2.625, small: '132–145', medium: '142–156', large: '152–173' },
+    { ht: `5'11"`, cm: 180, minElbow: 2.375, maxElbow: 2.625, small: '135–148', medium: '145–159', large: '155–176' },
+    { ht: `6'0"`, cm: 183, minElbow: 2.5, maxElbow: 2.75, small: '138–151', medium: '148–162', large: '158–179' }
+  ];
+
+  const currentFrameResult = useMemo(() => {
+    const row = heightWeightTable[heightIdx];
+    let size = 'Medium (中等骨架)';
+    let rangeLb = row.medium;
+    if (elbowInch < row.minElbow) {
+      size = 'Small (小骨架)';
+      rangeLb = row.small;
+    } else if (elbowInch > row.maxElbow) {
+      size = 'Large (大骨架 / Big Boned)';
+      rangeLb = row.large;
+    }
+    const [minLb, maxLb] = rangeLb.split('–').map(Number);
+    const minKg = Math.round(minLb / 2.20462);
+    const maxKg = Math.round(maxLb / 2.20462);
+    return { row, size, rangeLb, rangeKg: `${minKg}–${maxKg} kg` };
+  }, [heightIdx, elbowInch]);
+
+  const somatotypeDetails = {
+    ectomorph: {
+      name: '外胚型 (Ectomorph)',
+      page: '82-85',
+      tagline: '天生修长、代谢极快，但容易成为“瘦胖子 (Skinny Fat)”',
+      traits: '四肢修长、骨架较小、肉眼可见体脂较少，但受基因限制很难自然增加肌肉量 [P.82-83]。',
+      training: '专注爆发力训练 (Power Training) 与大重量抗阻训练以建立肌肉与骨密度（如冲刺跑坡 + 增强式跳跃 Plyometrics）[P.83-84]。',
+      nutrition: '每餐 25–30g 优质蛋白质（每日4餐含训前加餐）搭配优质复合碳水与健康脂肪。非训练日可省去训前加餐 [P.83]。',
+      meals: [
+        { time: '6:00 AM 训前加餐', food: '6 oz 香草杏仁奶 + 15g 蛋白粉 或 1片发芽全麦吐司涂1勺杏仁酱 [P.84]' },
+        { time: '8:00 AM 训后早餐 (30min窗口)', food: '藜麦碗 (Quinoa Bowl) 或 2片发芽全麦吐司+杏仁酱 + 绿女神果昔 (Green Goddess Smoothie) [P.84]' },
+        { time: '12:30 PM 午餐', food: '全麦三明治（鹰嘴豆泥/牛油果）+ 半杯藜麦 + 1颗水煮有机蛋或 4 oz 瘦肉蛋白 [P.84]' },
+        { time: '7:30 PM 晚餐 & 睡前', food: '6 oz 三文鱼或瘦牛肉 + 杂蔬沙拉 + 1杯糙米；睡前 20g 酪蛋白 (Casein) + 4 oz 酸樱桃汁 [P.84-85]' }
+      ]
+    },
+    mesomorph: {
+      name: '中胚型 (Mesomorph)',
+      page: '82, 85-86',
+      tagline: '天生的力量与运动健将，快肌纤维 (Fast-twitch fibers) 比例高',
+      traits: '躯干较长、四肢匀称，极易增肌，擅长爆发力与速度型运动（如世界冠军车手 Katie Compton 提到的“力量型基因”）[P.81, P.85]。',
+      training: '中等耐力训练 + 高强度间歇 (HIIT) + 增强式训练 (Plyometrics)，可加入普拉提或瑜伽拉长肌肉线条 [P.85]。',
+      nutrition: '摄入优质脂肪与适量碳水，精准把控蛋白质与支链氨基酸 (BCAAs) 的摄入时机，避免过度堆积不必要的肌肉体积 [P.85]。',
+      meals: [
+        { time: '6:00 AM 训前准备', food: '咖啡 + 6 oz 无糖香草杏仁奶配 5g BCAAs（支链氨基酸）[P.85]' },
+        { time: '8:00 AM 训后早餐 (30min窗口)', food: '3个蛋白+1个蛋黄 + 1/4牛油果 + 2张玉米饼 + 低脂茅屋芝士；或紫薯甜菜菠菜炒瘦肉 [P.85-86]' },
+        { time: '12:30 PM 午餐', food: '4 oz 深海冷水鱼或烤鸡胸配羽衣甘蓝坚果沙拉；或 6–8 卷牛油果寿司配味噌汤 [P.86]' },
+        { time: '7:30 PM 晚餐 & 睡前', food: '藜麦西兰花苹果石榴沙拉 (Lime Vinaigrette) 配 4 oz 瘦肉；睡前 20g 酪蛋白 + 4 oz 酸樱桃汁 [P.86]' }
+      ]
+    },
+    endomorph: {
+      name: '内胚型 (Endomorph)',
+      page: '82, 86-88',
+      tagline: '天生曲线丰满、极具耐力储备，但代谢容错率较低',
+      traits: '天生线条圆润柔和，容易储存脂肪。进化上具备极强的能量储备能力，但需要主动激活日常代谢 [P.86-87]。',
+      training: '高强度间歇 (HIIT)、CrossFit、力量训练与适度耐力运动（如 200米冲刺 + 跳深 + 俯卧撑 + 波比跳循环）[P.87]。',
+      nutrition: '优选健康脂肪与高蛋白，控制高升糖指数碳水以稳定胰岛素与血糖。起床后45分钟内必须吃早餐以压制皮质醇 [P.87]！',
+      meals: [
+        { time: '6:00 AM 训前加餐', food: '半根香蕉或苹果配 1/4 杯脱脂希腊酸奶；或 6 oz 杏仁奶 + 1勺蛋白粉 [P.87]' },
+        { time: '7:30 AM 训后恢复 & 9:00 早餐', food: '训后半杯脱脂希腊酸奶+10颗杏仁；早餐：2颗水波蛋配炒菠菜与发芽全麦吐司 [P.87]' },
+        { time: '1:30 PM 午餐', food: '全麦皮塔饼夹鹰嘴豆泥、大量蔬菜与1杯低脂茅屋芝士或金枪鱼；配1个橙子 [P.88]' },
+        { time: '6:30 PM 晚餐 & 睡前', food: '4–6 oz 瘦牛肉/鸡胸/冷水鱼 + 1杯蒸蔬菜 + 混合莓果黑豆沙拉；睡前 20g 酪蛋白 + 酸樱桃汁 [P.88]' }
+      ]
+    }
+  };
+
+  // ------------------------------------------
+  // Interactive 4: ACL 损伤风险 8 项自测 & 6步脊柱锁定法 [P.22-23, P.96-108]
+  // ------------------------------------------
+  const aclScreeningItems = [
+    {
+      id: 'foot',
+      title: '1. 足弓类型 (Foot Type)',
+      desc: '扁平足（易足内翻导致落地膝内扣）或高足弓（足踝僵硬把冲击力传导至膝盖）[P.105]。',
+      page: '105'
+    },
+    {
+      id: 'flex',
+      title: '2. 关节过度松弛 (Flexibility / Hypermobility)',
+      desc: '弯曲手腕尝试用大拇指触碰前臂：若能碰到，说明韧带过度松弛，急停变向时膝关节更难稳定 [P.105]。',
+      page: '105'
+    },
+    {
+      id: 'quad',
+      title: '3. 股四头肌主导 (Quad Dominance)',
+      desc: '原地连续跳跃时，最先感受到大腿前侧（股四头肌）发力，而非臀大肌（身体方向盘）率先激活 [P.97, P.105]。',
+      page: '97, 105'
+    },
+    {
+      id: 'landing',
+      title: '4. 落地膝内扣 (Landing Stability / Valgus)',
+      desc: '从台阶或跳箱跳下时，双膝未能笔直朝前弯曲，而是向内塌陷（女性 ACL 撕裂头号红灯信号）[P.23, P.105]。',
+      page: '23, 105'
+    },
+    {
+      id: 'glute',
+      title: '5. 臀肌力量不足 (Glute Strength)',
+      desc: '单脚站在台阶边缘让另一腿悬空，骨盆无法保持水平而是向悬空侧下掉 [P.105]。',
+      page: '105'
+    },
+    {
+      id: 'core',
+      title: '6. 核心与躯干稳定弱 (Core Strength)',
+      desc: '仰卧屈髋屈膝90度，仅靠收紧腹肌无法将双膝拉向胸口（下背紧绷、深层核心弱）[P.105-106]。',
+      page: '105-106'
+    },
+    {
+      id: 'legdom',
+      title: '7. 单侧腿主导失衡 (Leg Dominance)',
+      desc: '地上画方格，左右单腿分别30秒前后左右跳，双腿次数差异超过 10% [P.106]。',
+      page: '106'
+    },
+    {
+      id: 'squat',
+      title: '8. 过顶深蹲变形 (Squat Form)',
+      desc: '双手举木杆过顶深蹲至髋低于膝时，脚跟抬起或木杆向前倾倒 [P.106]。',
+      page: '106'
+    }
+  ];
+
+  const [checkedAclIds, setCheckedAclIds] = useState(['quad', 'landing']);
+  const [activeBracingStep, setActiveBracingStep] = useState(0);
+  const [selectedMatrixWeek, setSelectedMatrixWeek] = useState(1);
+
+  const toggleAclCheck = (id) => {
+    setCheckedAclIds((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
+  };
+
+  const bracingSteps = [
+    {
+      step: 'STEP 1',
+      title: '双脚旋入地面 (Screw Your Feet into the Ground)',
+      en: 'Externally rotate hips & press feet into ground',
+      desc: '双脚置于髋部正下方且相互平行。从髋部向外发力，仿佛把右脚顺时针、左脚逆时针“拧”进地板，激活髋外旋肌群 [P.108]。'
+    },
+    {
+      step: 'STEP 2',
+      title: '夹紧臀肌 (Squeeze Your Butt)',
+      en: 'Set pelvis in neutral position',
+      desc: '收紧臀大肌将骨盆锁定在中立位，随后稍微放松一点张力以维持日常与运动中的骨盆中立 [P.108]。'
+    },
+    {
+      step: 'STEP 3',
+      title: '横膈膜深吸气锁定 (Inhale and Lock It In)',
+      en: 'Big breath through diaphragm with glutes squeezed',
+      desc: '臀肌设定骨盆位置，腹肌负责上锁。在保持臀部微收的同时，通过横膈膜深吸一口气，将骨盆与肋骨锁定 [P.108]。'
+    },
+    {
+      step: 'STEP 4',
+      title: '呼气并平衡肋骨 (Exhale and Balance Your Rib Cage)',
+      en: 'Create intra-abdominal pressure around spine',
+      desc: '呼气时将肋骨对齐在骨盆正上方并绷紧腹部（注意：不是吸肚子 Sucking in，而是全方位绷紧 Stiffening 以建立腹内压）[P.108]。'
+    },
+    {
+      step: 'STEP 5',
+      title: '头肩归位中立 (Neutralize Head and Shoulders)',
+      en: 'Align ears over shoulders, hips, and ankles',
+      desc: '双肩向后外旋、展宽锁骨、掌心朝前。头部居中对齐双肩，目光平视，让耳、肩、髋、踝呈一条直线 [P.108]。'
+    },
+    {
+      step: 'STEP 6',
+      title: '完全锁定就绪 (Fully Braced)',
+      en: 'Ready for safe, dynamic athletic movement',
+      desc: '双臂自然垂于体侧，大拇指朝前，保持肩外旋。此时你如同一根笔直坚韧的竹子（而非弯曲吸管 Bendy Straw），随时准备发力 [P.97, P.108]！'
+    }
+  ];
+
+  // ------------------------------------------
+  // Interactive 5: RED-S 相对能量不足红绿灯评估 & 人生阶段导航 [P.36-39, P.43-78]
+  // ------------------------------------------
+  const [redsSelected, setRedsSelected] = useState(['low_carb']);
+  const [lifeStageTab, setLifeStageTab] = useState('menopause'); // 'menopause' | 'pregnancy'
+
+  const redsSymptoms = [
+    { id: 'amenorrhea', level: 'yellow', text: '月经周期异常或停经超过 3 个月 (Abnormal menstrual cycle > 3 months) [P.39]' },
+    { id: 'weight_loss', level: 'yellow', text: '一个月内体重骤降 5%–10% 或长期处于低能量可用性 (Low Energy Availability) [P.38]' },
+    { id: 'stress_fx', level: 'yellow', text: '曾发生 1 次或多次应力性骨折 (Stress Fractures) 或骨密度降低 [P.39, P.153]' },
+    { id: 'low_carb', level: 'yellow', text: '长期执行生酮/极低碳水或间歇性禁食，导致雌二醇下降、皮质醇与腹部脂肪上升 [P.37, P.89]' },
+    { id: 'bradycardia', level: 'red', text: '心电图显示严重心脏功能异常（如重度心动过缓 Bradycardia）或脱水导致的血流动力学不稳 [P.38-39]' },
+    { id: 'eating_disorder', level: 'red', text: '患有临床神经性厌食症 (Anorexia Nervosa) 或严重饮食失调伴随生理并发症 [P.38]' }
+  ];
+
+  const toggleReds = (id) => {
+    setRedsSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+  };
+
+  const redsStatus = useMemo(() => {
+    const hasRed = redsSelected.some((id) => redsSymptoms.find((s) => s.id === id)?.level === 'red');
+    const yellowCount = redsSelected.filter((id) => redsSymptoms.find((s) => s.id === id)?.level === 'yellow').length;
+    if (hasRed) {
+      return {
+        color: 'red',
+        badge: 'RED LIGHT · 高风险 (High Risk)',
+        clearance: '禁止参加竞技运动 (No clearance for sport participation) [P.39]',
+        desc: '临床表现严重，继续运动会对健康造成重大威胁并分散治疗精力。需立即寻求医疗团队干预并恢复能量摄入 [P.38-39]。'
+      };
+    }
+    if (yellowCount > 0) {
+      return {
+        color: 'yellow',
+        badge: 'YELLOW LIGHT · 中度风险 (Moderate Risk)',
+        clearance: '仅限在医疗监督与营养治疗计划下训练 (Supervised participation) [P.39]',
+        desc: '女性在能量匮乏或低碳水压力下会触发“饥荒保护机制”，下调生殖激素并将孕酮转化为皮质醇（储存脂肪、分解肌肉与骨骼）。需每 1–3 个月复查并立刻停止断食/低碳饮食 [P.37-39]。'
+      };
+    }
+    return {
+      color: 'green',
+      badge: 'GREEN LIGHT · 低风险健康状态 (Low Risk)',
+      clearance: '完全批准参加各项运动 (Full sport participation) [P.39]',
+      desc: '能量可用性 (EA = 能量摄入 - 运动消耗) 充足，内分泌系统与骨骼肌肉系统运转健康 [P.38-39]！'
+    };
+  }, [redsSelected]);
+
+  // ------------------------------------------
+  // Interactive 6: 肠道菌群模拟器 & 生物黑客尿检试纸解读器 [P.139-149, P.254-256]
+  // ------------------------------------------
+  const [gutFactors, setGutFactors] = useState({
+    probiotics: true,
+    prebiotics: true,
+    tums: false,
+    antibiotics: false,
+    nsaids: false,
+    sweeteners: false,
+    processed: false,
+    ocp: false
+  });
+
+  const gutSimulation = useMemo(() => {
+    let score = 60;
+    if (gutFactors.probiotics) score += 18;
+    if (gutFactors.prebiotics) score += 16;
+    if (gutFactors.tums) score += 6;
+    if (gutFactors.antibiotics) score -= 25;
+    if (gutFactors.nsaids) score -= 22;
+    if (gutFactors.sweeteners) score -= 18;
+    if (gutFactors.processed) score -= 20;
+    if (gutFactors.ocp) score -= 12;
+
+    const clamped = Math.max(10, Math.min(95, score));
+    // Bacteroidetes (消耗糖分、有助精瘦) vs Firmicutes (促进脂肪储存、引发甜食渴望) [P.140-141]
+    const bacteroidetesPct = clamped;
+    const firmicutesPct = 100 - clamped;
+
+    return {
+      score: clamped,
+      bacteroidetesPct,
+      firmicutesPct,
+      status:
+        clamped >= 70
+          ? '菌群丰富且平衡：拟杆菌门 (Bacteroidetes) 占优，迷走神经 (Vagus Nerve) 情绪稳定，耐热能力提升 14%，呼吸道感染天数减半 [P.141, P.144]！'
+          : clamped >= 45
+          ? '菌群轻度失衡：厚壁菌门 (Firmicutes) 抬头，夜间可能出现莫名的黑巧克力/甜食渴望与运动胃肠胀气 [P.141]。'
+          : '红色警报（肠漏风险 Leaky Gut）：厚壁菌门与有害菌占领高地，肠黏膜屏障受损，内毒素进入血液引发全身炎症、焦虑与严重腹泻 [P.145, P.147]！'
+    };
+  }, [gutFactors]);
+
+  const [selectedPeeMarker, setSelectedPeeMarker] = useState('SG');
+
+  const peeStickMarkers = {
+    SG: {
+      code: 'SG',
+      name: '尿比重 (Specific Gravity)',
+      normal: '1.005 – 1.020',
+      warning: '≥ 1.025 (缺水) / > 1.028 (明显脱水)',
+      desc: '衡量身体水分状态的核心指标！蒸馏水为 1.000。若晨起或骑行测试中保持在 1.015–1.020，功率衰减最小且恢复最快 [P.255-256]。'
+    },
+    PRO: {
+      code: 'PRO',
+      name: '尿蛋白 (Protein)',
+      normal: '黄色 (阴性 Negative)',
+      warning: '绿色 (阳性 Positive)',
+      desc: '正常尿液不含蛋白质。若高强度训练次日早晨仍呈绿色阳性，说明身体处于分解代谢 (Catabolic) 状态且恢复不足！需立刻增加全天蛋白质摄入并安排主动恢复日 [P.254-255]。'
+    },
+    KET: {
+      code: 'KET',
+      name: '尿酮体 (Ketones)',
+      normal: '阴性 / 稳定微量',
+      warning: '深紫色 (Dark Purple)',
+      desc: '脂肪酸过度分解的产物。若呈深紫色，说明你的碳水化合物摄入严重不足（生酮/低碳饮食常见），随时面临“撞墙 (Hitting the wall)”与恢复停滞风险 [P.255, P.261]。'
+    },
+    LEU: {
+      code: 'LEU',
+      name: '白细胞 (Leukocytes)',
+      normal: '无变色 (阴性)',
+      warning: '紫色 (阳性)',
+      desc: '大强度训练次日若呈紫色阳性，提示恢复不足；若未进行高强度训练却呈阳性，往往预示病毒或细菌感染即将发作，需立刻休息补水 [P.254]。'
+    },
+    BLO: {
+      code: 'BLO',
+      name: '尿潜血 (Blood / Hemoglobin)',
+      normal: '无绿色斑点',
+      warning: '60秒内出现绿色',
+      desc: '训练角度代表明显的肌肉与细胞损伤，必须大幅减量！此外，女性在月经来潮前 2–3 天肉眼不可见时即可测出潜血，可用于精准预测经期 [P.255]。'
+    },
+    PH: {
+      code: 'pH',
+      name: '酸碱度 (pH)',
+      normal: '晨起 6.5–7.0，晚间 7.5–8.0',
+      warning: '持续极低或极高',
+      desc: '无氧高强度运动后 2 小时内 pH 值会随乳酸产生而变化。训前补充柠檬酸钠/碳酸氢钠可帮助缓冲血液酸度 [P.255-256]。'
+    }
+  };
+
+  // 导航栏目定义
+  const navSections = [
+    { id: 'all', label: '全书总览 (All)', icon: BookOpen },
+    { id: 'part1', label: 'Part I · 性别差异与周期', icon: HeartPulse },
+    { id: 'part2', label: 'Part II · 体型/核心/骨骼/肠道', icon: Dumbbell },
+    { id: 'part3', label: 'Part III · 营养/水合/生物黑客', icon: Zap }
+  ];
+
+  const showSection = (part) => activeTab === 'all' || activeTab === part;
+
+  return (
+    <div className="min-h-screen bg-[#111315] text-zinc-100 font-sans selection:bg-[#00A8E8] selection:text-black">
+      {/* ==========================================
+          顶部固定导航栏 (含作者 redweff 署名与原书视觉)
+         ========================================== */}
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-[#111315]/90 border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="px-3 py-1 bg-gradient-to-b from-zinc-100 to-zinc-400 text-[#111315] font-black text-xl tracking-[0.22em] rounded shadow-inner">
+              ROAR
+            </div>
+            <div className="hidden sm:block">
+              <div className="text-xs font-bold tracking-widest text-[#00A8E8] uppercase">
+                Female Physiology & Performance
+              </div>
+              <div className="text-xs text-zinc-400">
+                Stacy T. Sims, PhD & Selene Yeager · 原书深度交互导读
+              </div>
+            </div>
+          </div>
+
+          {/* 模块切换过滤 */}
+          <nav className="hidden md:flex items-center gap-1 bg-zinc-900/90 p-1 rounded-lg border border-zinc-800">
+            {navSections.map((sec) => {
+              const Icon = sec.icon;
+              const active = activeTab === sec.id;
+              return (
+                <button
+                  key={sec.id}
+                  onClick={() => setActiveTab(sec.id)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+                    active
+                      ? 'bg-[#009CDE] text-white shadow-[0_0_15px_rgba(0,156,222,0.4)]'
+                      : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  <span>{sec.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* 分享人 / 作者署名徽章 redweff */}
+          <div className="flex items-center gap-2 bg-zinc-900 border border-[#00A8E8]/50 px-3 py-1.5 rounded-full shadow-[0_0_12px_rgba(0,168,232,0.2)]">
+            <User className="w-4 h-4 text-[#00A8E8]" />
+            <span className="text-xs text-zinc-300">
+              读书分享 / 制作：<strong className="text-white font-mono tracking-wide">redweff</strong>
+            </span>
+          </div>
+        </div>
+
+        {/* 移动端导航栏 */}
+        <div className="flex md:hidden overflow-x-auto px-4 py-2 gap-2 bg-[#16191D] border-t border-zinc-800">
+          {navSections.map((sec) => (
+            <button
+              key={sec.id}
+              onClick={() => setActiveTab(sec.id)}
+              className={`px-3 py-1 rounded text-xs font-bold whitespace-nowrap ${
+                activeTab === sec.id ? 'bg-[#009CDE] text-white' : 'bg-zinc-800 text-zinc-400'
+              }`}
+            >
+              {sec.label}
+            </button>
+          ))}
+        </div>
+      </header>
+
+      {/* ==========================================
+          HERO 封面横幅 (致敬原书 P.1-2, P.6-10 金属与电光蓝风格)
+         ========================================== */}
+      <section className="relative overflow-hidden border-b border-zinc-800 bg-gradient-to-b from-[#16191D] via-[#111315] to-[#111315] pt-12 pb-16">
+        {/* 背景装饰网格与光晕 */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(0,156,222,0.18),transparent_55%)] pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7 space-y-6">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="px-3 py-1 rounded-full bg-[#009CDE]/20 border border-[#009CDE] text-[#38BDF8] text-xs font-bold tracking-widest uppercase">
+                  Interactive Book Companion
+                </span>
+                <span className="px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono">
+                  Curated by <strong className="text-[#00A8E8]">redweff</strong>
+                </span>
+                <PageBadge pages="1-10" />
+              </div>
+
+              {/* 复刻原书 P.2 立体金属 ROAR 标题 */}
+              <div>
+                <h1 className="text-6xl sm:text-8xl font-black tracking-[0.22em] text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-500 drop-shadow-[0_4px_20px_rgba(255,255,255,0.15)] select-none">
+                  ROAR
+                </h1>
+                <p className="mt-2 text-lg sm:text-xl font-bold text-[#00A8E8] tracking-wide uppercase">
+                  How to Match Your Food and Fitness to Your Female Physiology
+                </p>
+                <p className="text-sm text-zinc-400 mt-1">
+                  原著：Stacy T. Sims, PhD（斯坦福大学运动生理学家与营养科学家）& Selene Yeager [P.1, P.291] ｜ 读书分享与交互设计：<strong className="text-white">redweff</strong>
+                </p>
+              </div>
+
+              {/* 核心宣言框 [P.6-7] */}
+              <blockquote className="p-5 rounded-xl bg-zinc-900/90 border-l-4 border-[#00A8E8] shadow-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono uppercase tracking-widest text-[#00A8E8]">
+                    The Core Mantra · 核心宣言
+                  </span>
+                  <PageBadge pages="6-7" />
+                </div>
+                <p className="text-xl sm:text-2xl font-black text-white italic tracking-tight">
+                  “You are not a small man. Stop eating and training like one.”
+                </p>
+                <p className="mt-2 text-sm sm:text-base text-zinc-300 leading-relaxed">
+                  <strong>“女性不是缩小版的男人。停止像男人一样吃饭和训练！”</strong> 长期以来，运动营养与训练界对待女性的方式仅仅是“缩减热量、换个粉色包装 (Shrink it and pink it)” [P.7]。本书从斯坦福与奥塔哥大学实验室数据出发，彻底重构女性在月经周期、围绝经期、孕期、核心生物力学、肠道菌群与运动水合的黄金法则。
+                </p>
+              </blockquote>
+
+              {/* 快速数据概览卡片 */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                <div className="p-3.5 rounded-lg bg-zinc-900/80 border border-zinc-800">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-zinc-400">高激素期血容量</span>
+                    <PageBadge pages="30" />
+                  </div>
+                  <div className="text-2xl font-black text-[#00A8E8] mt-1">-8%</div>
+                  <div className="text-[11px] text-zinc-400 mt-0.5">Plasma Volume 下降</div>
+                </div>
+                <div className="p-3.5 rounded-lg bg-zinc-900/80 border border-zinc-800">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-zinc-400">女性黄金恢复窗</span>
+                    <PageBadge pages="20, 186" />
+                  </div>
+                  <div className="text-2xl font-black text-[#00A8E8] mt-1">30 min</div>
+                  <div className="text-[11px] text-zinc-400 mt-0.5">训后需补 25-30g 蛋白质</div>
+                </div>
+                <div className="p-3.5 rounded-lg bg-zinc-900/80 border border-zinc-800">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-zinc-400">运动胃肠不适比</span>
+                    <PageBadge pages="176, 189" />
+                  </div>
+                  <div className="text-2xl font-black text-[#00A8E8] mt-1">5 : 1</div>
+                  <div className="text-[11px] text-zinc-400 mt-0.5">女性 vs 男性 GI Distress</div>
+                </div>
+                <div className="p-3.5 rounded-lg bg-zinc-900/80 border border-zinc-800">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-zinc-400">最佳水合饮料浓度</span>
+                    <PageBadge pages="195, 201" />
+                  </div>
+                  <div className="text-2xl font-black text-[#00A8E8] mt-1">3–4%</div>
+                  <div className="text-[11px] text-zinc-400 mt-0.5">低渗碳水电解质液</div>
+                </div>
+              </div>
+            </div>
+
+            {/* 右侧：原书视觉风格动感插画海报 (致敬 P.11, P.79, P.157 蓝黑运动美学) */}
+            <div className="lg:col-span-5">
+              <div className="relative rounded-2xl bg-gradient-to-br from-zinc-200 via-zinc-100 to-zinc-300 p-1 shadow-[0_0_40px_rgba(0,156,222,0.25)]">
+                <div className="bg-[#F4F6F8] rounded-xl p-6 text-[#111315] relative overflow-hidden">
+                  {/* 模仿原书白色文化砖背景纹理 */}
+                  <svg className="absolute inset-0 w-full h-full opacity-35 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <pattern id="brick-wall" width="60" height="30" patternUnits="userSpaceOnUse">
+                        <rect width="60" height="30" fill="none" stroke="#CBD5E1" strokeWidth="1" />
+                        <line x1="30" y1="0" x2="30" y2="15" stroke="#CBD5E1" strokeWidth="1" />
+                        <line x1="0" y1="15" x2="60" y2="15" stroke="#CBD5E1" strokeWidth="1" />
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#brick-wall)" />
+                  </svg>
+
+                  <div className="relative z-10 flex justify-between items-center mb-3">
+                    <span className="text-xs font-black tracking-widest uppercase px-2.5 py-1 bg-[#111315] text-white rounded">
+                      ROAR VISUAL EDITION · 蓝黑运动美学
+                    </span>
+                    <PageBadge pages="11, 79, 157" light />
+                  </div>
+
+                  {/* 精致矢量插画：还原书中标志性的蓝色运动背心 + 黑色短裤 + 蓝色药球/壶铃训练场景 */}
+                  <svg viewBox="0 0 420 290" className="w-full h-auto drop-shadow-md relative z-10">
+                    {/* 地面深灰橡胶地垫 */}
+                    <rect x="0" y="240" width="420" height="50" fill="#374151" rx="4" />
+                    <line x1="0" y1="240" x2="420" y2="240" stroke="#1F2937" strokeWidth="3" />
+
+                    {/* 背景哑铃架与杠铃片 (致敬 P.99-136 摄影布景) */}
+                    <g opacity="0.85">
+                      <polygon points="25,240 45,95 65,95 85,240" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="2" />
+                      {[115, 145, 175, 205].map((y, i) => (
+                        <g key={i}>
+                          <rect x="18" y={y} width="22" height="12" rx="3" fill="#4B5563" />
+                          <rect x="70" y={y} width="22" height="12" rx="3" fill="#4B5563" />
+                        </g>
+                      ))}
+                      {/* 右侧杠铃片堆与壶铃 */}
+                      <rect x="310" y="222" width="75" height="18" rx="4" fill="#1F2937" />
+                      <rect x="315" y="206" width="65" height="15" rx="4" fill="#111827" />
+                      <rect x="320" y="192" width="55" height="13" rx="3" fill="#374151" />
+                      {/* 壶铃 */}
+                      <circle cx="400" cy="226" r="14" fill="#111827" />
+                      <path d="M392 214 C392 202, 408 202, 408 214" stroke="#111827" strokeWidth="4" fill="none" />
+                    </g>
+
+                    {/* 动感女性运动员剪影插画 (着原书标志性 #009CDE 蓝色运动背心与黑色短裤) */}
+                    <g transform="translate(15, 0)">
+                      {/* 后腿 (伸展蹬地) */}
+                      <path
+                        d="M195 155 L265 195 L325 225"
+                        stroke="#D99B78"
+                        strokeWidth="20"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        fill="none"
+                      />
+                      {/* 前腿 (屈膝弓步爆发) */}
+                      <path
+                        d="M175 150 L125 165 L118 228"
+                        stroke="#E0A684"
+                        strokeWidth="21"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        fill="none"
+                      />
+                      {/* 蓝绿拼色跑鞋 (还原书中鞋款配色) */}
+                      <path d="M95 232 Q115 220 130 228 L132 240 L92 240 Z" fill="#009CDE" />
+                      <path d="M92 238 L132 238" stroke="#A3E635" strokeWidth="3" />
+                      <path d="M320 218 L342 232 L325 242 L312 226 Z" fill="#009CDE" />
+
+                      {/* 黑色运动短裤 */}
+                      <path d="M160 132 L212 138 L218 168 L162 165 Z" fill="#111315" />
+
+                      {/* 腹部核心线条 */}
+                      <path d="M166 102 L202 108 L206 136 L162 134 Z" fill="#E0A684" />
+
+                      {/* 标志性亮蓝色运动背心 (#009CDE) */}
+                      <path
+                        d="M165 68 L204 74 L203 108 L164 103 Z"
+                        fill="#009CDE"
+                        stroke="#0077A8"
+                        strokeWidth="1.5"
+                      />
+
+                      {/* 手臂持蓝色药球 (Medicine Ball) 爆发推举 */}
+                      <path
+                        d="M172 75 L125 55 L98 35"
+                        stroke="#E0A684"
+                        strokeWidth="13"
+                        strokeLinecap="round"
+                        fill="none"
+                      />
+                      <circle cx="88" cy="28" r="20" fill="#009CDE" stroke="#0284C7" strokeWidth="2" />
+                      <path d="M75 22 Q88 12 101 22" stroke="#7DD3FC" strokeWidth="2" fill="none" />
+
+                      {/* 头部与马尾辫 */}
+                      <circle cx="182" cy="44" r="16" fill="#E0A684" />
+                      <path
+                        d="M172 30 Q195 22 215 36 Q235 45 245 32 Q235 60 205 52 Z"
+                        fill="#5C3A21"
+                      />
+                    </g>
+
+                    {/* 原书风格黑银渐变章节铭牌 (复刻 P.11, P.79, P.157) */}
+                    <g transform="translate(185, 85)">
+                      <rect
+                        x="0"
+                        y="0"
+                        width="225"
+                        height="54"
+                        fill="url(#roar-metal-bar)"
+                        rx="3"
+                        stroke="#374151"
+                      />
+                      <text
+                        x="112"
+                        y="35"
+                        textAnchor="middle"
+                        fill="#FFFFFF"
+                        fontSize="24"
+                        fontWeight="900"
+                        letterSpacing="6"
+                      >
+                        ROAR LAB
+                      </text>
+                    </g>
+                    <defs>
+                      <linearGradient id="roar-metal-bar" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#111315" />
+                        <stop offset="50%" stopColor="#4B5563" />
+                        <stop offset="100%" stopColor="#111315" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+
+                  {/* 底部三阶段结构说明 [P.4] */}
+                  <div className="mt-4 grid grid-cols-3 gap-2 text-center relative z-10">
+                    <div className="bg-white/90 p-2 rounded border border-zinc-300">
+                      <div className="text-[10px] font-mono font-bold text-[#009CDE]">PART I [P.11]</div>
+                      <div className="text-xs font-bold text-zinc-900">女性运动生理学</div>
+                    </div>
+                    <div className="bg-white/90 p-2 rounded border border-zinc-300">
+                      <div className="text-[10px] font-mono font-bold text-[#009CDE]">PART II [P.79]</div>
+                      <div className="text-xs font-bold text-zinc-900">女性体能基石</div>
+                    </div>
+                    <div className="bg-white/90 p-2 rounded border border-zinc-300">
+                      <div className="text-[10px] font-mono font-bold text-[#009CDE]">PART III [P.157]</div>
+                      <div className="text-xs font-bold text-zinc-900">巅峰表现计划</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          PART I: WHAT IT MEANS TO BE A WOMAN ON THE MOVE [P.11-78]
+         ===================================================================== */}
+      {showSection('part1') && (
+        <section className="py-16 border-b border-zinc-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            {/* Part I 标题横幅 */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#009CDE] pb-4 gap-4">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="px-3 py-1 bg-gradient-to-r from-zinc-800 to-zinc-900 border border-zinc-700 text-white font-black tracking-[0.25em] text-sm uppercase">
+                    PART I
+                  </span>
+                  <PageBadge pages="11-78" />
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-black text-white mt-2 tracking-tight">
+                  运动中的女性意味着什么 · <span className="text-[#00A8E8]">What It Means to Be a Woman on the Move</span>
+                </h2>
+              </div>
+              <p className="text-sm text-zinc-400 max-w-md">
+                涵盖第1章《性别之战》、第2章《掌控月经周期》、第3章《跨越更年期》与第4章《孕期运动指南》[P.4]。
+              </p>
+            </div>
+
+            {/* ------------------------------------------
+                第1章：性别之战 (Battle of the Sexes) & 原书图表复刻 [P.12-24]
+               ------------------------------------------ */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* 左侧：性别生理差异核心解析 + VO2max SVG 图表复刻 [P.12-18] */}
+              <div className="lg:col-span-7 bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-6">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <span className="text-xs font-mono text-[#00A8E8] uppercase tracking-widest">
+                      Chapter 1 · Battle of the Sexes
+                    </span>
+                    <h3 className="text-2xl font-black text-white mt-0.5">
+                      男女运动生理学大比拼：普锐斯 (Prius) vs 野马 (Mustang)
+                    </h3>
+                  </div>
+                  <PageBadge pages="12-24" />
+                </div>
+
+                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+                  书中将女性比作高效节能的<strong>混合动力普锐斯 (Prius)</strong>，而男性则是大排量的<strong>野马跑车 (Mustang)</strong> [P.15, P.17]。虽然男性拥有更大的心脏、肺活量（比女性大25%–30%）、更高的血红蛋白 (Hemoglobin) 以及更大的 II 型快肌纤维 (Type II Power Fibers)，但在超长距离耐力赛与公开水域游泳中，女性的<strong>I 型慢肌纤维 (Type I Endurance Fibers)</strong> 与更高的体脂浮力让我们极具优势——例如在 20 英里的卡塔琳娜海峡游泳中，女性平均成绩比男性快 7 分钟，且双向总纪录均由女性保持 [P.13-15]！
+                </p>
+
+                {/* 精准复刻原书 P.16 图表：MAXIMUM OXYGEN USE: WOMEN VS. MEN */}
+                <div className="bg-[#F4F6F8] text-[#111315] rounded-xl p-5 border border-zinc-300 shadow-inner">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h4 className="font-black text-sm sm:text-base tracking-wide uppercase">
+                        MAXIMUM OXYGEN USE: WOMEN VS. MEN (最大摄氧量对比)
+                      </h4>
+                      <p className="text-xs text-zinc-600">
+                        训练后女性运动员的 VO₂max (55) 远超未训练男性 (44)！基因不是借口，我们极具可塑性 (Trainable) [P.16]。
+                      </p>
+                    </div>
+                    <PageBadge pages="16" light />
+                  </div>
+
+                  <svg viewBox="0 0 560 220" className="w-full h-auto">
+                    {/* 坐标网格 */}
+                    {[20, 30, 40, 50, 60, 70, 80, 90].map((val, idx) => {
+                      const x = 110 + idx * 58;
+                      return (
+                        <g key={val}>
+                          <line x1={x} y1="15" x2={x} y2="180" stroke="#CBD5E1" strokeWidth="1.5" />
+                          <text x={x} y="198" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#334155">
+                            {val}
+                          </text>
+                        </g>
+                      );
+                    })}
+                    <rect x="110" y="15" width="406" height="165" fill="none" stroke="#1E293B" strokeWidth="2" />
+
+                    {/* 1. Untrained women: ~33-43, mean 38 */}
+                    <text x="100" y="45" textAnchor="end" fontSize="12" fontWeight="bold" fill="#0F172A">
+                      未训练女性 (Untrained women)
+                    </text>
+                    <rect x={110 + (33 - 20) * 5.8} y="30" width={10 * 5.8} height="24" fill="#009CDE" rx="3" />
+                    <line x1={110 + (38 - 20) * 5.8} y1="28" x2={110 + (38 - 20) * 5.8} y2="56" stroke="#FFFFFF" strokeWidth="2.5" />
+                    <text x={110 + (38 - 20) * 5.8} y="24" textAnchor="middle" fontSize="13" fontWeight="900" fill="#0077A8">
+                      38
+                    </text>
+
+                    {/* 2. Untrained men: ~37-51, mean 44 */}
+                    <text x="100" y="85" textAnchor="end" fontSize="12" fontWeight="bold" fill="#0F172A">
+                      未训练男性 (Untrained men)
+                    </text>
+                    <rect x={110 + (37 - 20) * 5.8} y="70" width={14 * 5.8} height="24" fill="#64748B" rx="3" />
+                    <line x1={110 + (44 - 20) * 5.8} y1="68" x2={110 + (44 - 20) * 5.8} y2="96" stroke="#FFFFFF" strokeWidth="2.5" />
+                    <text x={110 + (44 - 20) * 5.8} y="64" textAnchor="middle" fontSize="13" fontWeight="900" fill="#334155">
+                      44
+                    </text>
+
+                    {/* 3. Female athletes: ~50-61, mean 55 */}
+                    <text x="100" y="125" textAnchor="end" fontSize="12" fontWeight="bold" fill="#0F172A">
+                      女性运动员 (Female athletes)
+                    </text>
+                    <rect x={110 + (50 - 20) * 5.8} y="110" width={11 * 5.8} height="24" fill="#009CDE" rx="3" />
+                    <line x1={110 + (55 - 20) * 5.8} y1="108" x2={110 + (55 - 20) * 5.8} y2="136" stroke="#FFFFFF" strokeWidth="2.5" />
+                    <text x={110 + (55 - 20) * 5.8} y="104" textAnchor="middle" fontSize="13" fontWeight="900" fill="#0077A8">
+                      55
+                    </text>
+
+                    {/* 4. Male athletes: ~60-85, mean 71 */}
+                    <text x="100" y="165" textAnchor="end" fontSize="12" fontWeight="bold" fill="#0F172A">
+                      男性运动员 (Male athletes)
+                    </text>
+                    <rect x={110 + (60 - 20) * 5.8} y="150" width={25 * 5.8} height="24" fill="#64748B" rx="3" />
+                    <line x1={110 + (71 - 20) * 5.8} y1="148" x2={110 + (71 - 20) * 5.8} y2="176" stroke="#FFFFFF" strokeWidth="2.5" />
+                    <text x={110 + (71 - 20) * 5.8} y="144" textAnchor="middle" fontSize="13" fontWeight="900" fill="#334155">
+                      71
+                    </text>
+
+                    <text x="313" y="216" textAnchor="middle" fontSize="12" fontWeight="900" fill="#0F172A">
+                      VO₂max (ml · kg⁻¹ · min⁻¹)
+                    </text>
+                  </svg>
+                </div>
+
+                {/* 睾酮 vs 雌激素对比表 [P.18] */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-bold text-sm text-zinc-200">睾酮 (Testosterone) 主导效应</span>
+                      <PageBadge pages="18" />
+                    </div>
+                    <ul className="text-xs text-zinc-400 space-y-1.5">
+                      <li>• 刺激骨骼生成，形成更大的骨骼框架</li>
+                      <li>• 促进蛋白质合成 (Protein Synthesis)，肌肉体积更大</li>
+                      <li>• 刺激促红细胞生成素 (EPO) 分泌，红细胞多 6%、血红蛋白高 10%–15% [P.16, P.18]</li>
+                    </ul>
+                  </div>
+                  <div className="p-4 rounded-xl bg-zinc-900 border border-[#009CDE]/40">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-bold text-sm text-[#38BDF8]">雌激素 (Estrogen) 主导效应</span>
+                      <PageBadge pages="18, 20" />
+                    </div>
+                    <ul className="text-xs text-zinc-300 space-y-1.5">
+                      <li>• 激活脂蛋白脂肪酶 (Lipoprotein Lipase)，运动中更擅长动用脂肪供能并节省糖原</li>
+                      <li>• 抑制合成代谢刺激 (Inhibition of anabolic stimuli)，增肌需靠大重量神经募集与亮氨酸</li>
+                      <li>• 运动后燃脂代谢在 3 小时内回落常态（男性可持续长达 21 小时）[P.20]</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 右侧：复刻原书 P.23 Q角 (Q-Angle) 解剖插图与生物力学对比 */}
+              <div className="lg:col-span-5 bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-xs font-mono text-[#00A8E8] uppercase tracking-widest">
+                      Biomechanics & Anatomy
+                    </span>
+                    <h3 className="text-xl font-black text-white mt-0.5">
+                      骨盆宽度与 Q角 (Q-Angle) 解剖图解
+                    </h3>
+                  </div>
+                  <PageBadge pages="22-23" />
+                </div>
+
+                <p className="text-sm text-zinc-300 leading-relaxed">
+                  女性为了分娩拥有更宽的沙漏型骨盆，这增大了<strong>Q角 (Quadriceps Angle，股四头肌与髌腱之间的夹角)</strong>：女性平均为 <strong>15.8°</strong>，男性仅为 <strong>11.2°</strong> [P.22]。加之女性关节韧带受激素影响更具高活动度 (Hypermobility)，跳跃落地时膝盖极易向内塌陷（膝外翻），导致年轻女运动员发生前交叉韧带 (ACL) 撕裂的风险高达男性的 <strong>2 至 8 倍</strong> [P.22-23, P.96]！
+                </p>
+
+                {/* 精准复刻 P.23 Female vs Male Q-Angle 骨骼解剖 SVG */}
+                <div className="bg-[#22262B] rounded-xl p-4 border border-zinc-700">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-xs font-mono text-zinc-300">FIG 1.2 · FEMALE (15.8°) VS. MALE (11.2°) Q-ANGLE</span>
+                    <PageBadge pages="23" />
+                  </div>
+                  <svg viewBox="0 0 380 270" className="w-full h-auto">
+                    {/* FEMALE SKELETON (Left) */}
+                    <g transform="translate(20, 10)">
+                      <text x="75" y="16" textAnchor="middle" fill="#38BDF8" fontSize="14" fontWeight="bold">
+                        Female (女性 15.8°)
+                      </text>
+                      {/* 较宽的女性骨盆 */}
+                      <path
+                        d="M20 35 C10 25, 45 20, 62 40 L68 65 L82 65 L88 40 C105 20, 140 25, 130 35 C138 60, 120 78, 95 76 L55 76 C30 78, 12 60, 20 35 Z"
+                        fill="#F8FAFC"
+                        stroke="#0F172A"
+                        strokeWidth="2.5"
+                      />
+                      {/* 左股骨 (Femur) - 斜向内倾角度大 */}
+                      <path d="M28 70 L58 160" stroke="#F8FAFC" strokeWidth="11" strokeLinecap="round" />
+                      {/* 右股骨 (带 Q-Angle 测量黑三角，复刻 P.23) */}
+                      <path d="M122 70 L92 160" stroke="#F8FAFC" strokeWidth="11" strokeLinecap="round" />
+                      {/* Q-Angle 黑色阴影三角形 (复刻原书 P.23) */}
+                      <polygon points="88,82 116,82 88,158" fill="#00A8E8" opacity="0.85" />
+                      <text
+                        x="76"
+                        y="125"
+                        fill="#38BDF8"
+                        fontSize="12"
+                        fontWeight="bold"
+                        transform="rotate(-90 76 125)"
+                      >
+                        Q Angle 15.8°
+                      </text>
+                      {/* 胫骨与腓骨 (Tibia & Fibula) */}
+                      <path d="M58 166 L54 238" stroke="#F8FAFC" strokeWidth="9" strokeLinecap="round" />
+                      <path d="M92 166 L96 238" stroke="#F8FAFC" strokeWidth="9" strokeLinecap="round" />
+                      {/* 膝关节标示 */}
+                      <circle cx="58" cy="162" r="6" fill="#EF4444" />
+                      <circle cx="92" cy="162" r="6" fill="#EF4444" />
+                    </g>
+
+                    {/* MALE SKELETON (Right) */}
+                    <g transform="translate(205, 10)">
+                      <text x="75" y="16" textAnchor="middle" fill="#94A3B8" fontSize="14" fontWeight="bold">
+                        Male (男性 11.2°)
+                      </text>
+                      {/* 较窄高的男性骨盆 */}
+                      <path
+                        d="M32 32 C25 22, 52 20, 65 42 L70 66 L80 66 L85 42 C98 20, 125 22, 118 32 C122 58, 110 78, 90 76 L60 76 C40 78, 28 58, 32 32 Z"
+                        fill="#CBD5E1"
+                        stroke="#0F172A"
+                        strokeWidth="2.5"
+                      />
+                      {/* 左股骨 - 更接近垂直 */}
+                      <path d="M40 72 L56 160" stroke="#CBD5E1" strokeWidth="12" strokeLinecap="round" />
+                      {/* 右股骨 */}
+                      <path d="M110 72 L94 160" stroke="#CBD5E1" strokeWidth="12" strokeLinecap="round" />
+                      {/* Q-Angle 小三角形 */}
+                      <polygon points="90,82 107,82 90,158" fill="#111315" />
+                      <text
+                        x="80"
+                        y="125"
+                        fill="#CBD5E1"
+                        fontSize="12"
+                        fontWeight="bold"
+                        transform="rotate(-90 80 125)"
+                      >
+                        Q Angle 11.2°
+                      </text>
+                      {/* 胫骨与腓骨 */}
+                      <path d="M56 166 L55 238" stroke="#CBD5E1" strokeWidth="10" strokeLinecap="round" />
+                      <path d="M94 166 L95 238" stroke="#CBD5E1" strokeWidth="10" strokeLinecap="round" />
+                      <circle cx="56" cy="162" r="6" fill="#00A8E8" />
+                      <circle cx="94" cy="162" r="6" fill="#00A8E8" />
+                    </g>
+                  </svg>
+                  <p className="text-xs text-zinc-400 mt-2 text-center">
+                    解决方案：强化臀中肌、臀大肌与核心稳定肌群（身体方向盘 Steering Wheel），完全可消除膝内扣风险 [P.23, P.97]！
+                  </p>
+                </div>
+
+                {/* 高海拔与极寒极热环境速览 [P.20-21] */}
+                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-bold text-[#00A8E8] uppercase">高海拔与环境适应优势</span>
+                    <PageBadge pages="20-21" />
+                  </div>
+                  <p className="text-xs text-zinc-300 leading-relaxed">
+                    在科罗拉多派克峰 (Pikes Peak, 海拔 14,109 英尺) 实验中，男性在高海拔更依赖有限的碳水化合物，而<strong>女性在高海拔燃烧脂肪的比例反而比平原更高</strong>，因此在高海拔山地耐力赛中女性具备天然代谢优势 [P.21]！
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* =========================================================
+                INTERACTIVE 1: 28天月经周期生物黑客与营养模拟器 [P.25-42]
+               ========================================================= */}
+            <div className="bg-gradient-to-b from-[#181B1F] to-[#14171A] rounded-2xl p-6 sm:p-8 border-2 border-[#009CDE]/50 shadow-[0_0_30px_rgba(0,156,222,0.12)] space-y-8">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded bg-[#009CDE] text-white text-xs font-black uppercase tracking-wider">
+                      Interactive Module 01
+                    </span>
+                    <span className="text-xs font-mono text-[#38BDF8] uppercase">
+                      Chapter 2 · Demystifying and Mastering Your Menstrual Cycle
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
+                    28天生理周期激素曲线与训练/营养动态计算器
+                  </h3>
+                </div>
+                <PageBadge pages="25-42" />
+              </div>
+
+              {/* 交互控制器：天数滑块 + 体重输入 */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center bg-zinc-900/90 p-5 rounded-xl border border-zinc-800">
+                <div className="lg:col-span-8 space-y-3">
+                  <div className="flex flex-wrap justify-between items-center gap-2">
+                    <label className="text-sm font-bold text-white flex items-center gap-2">
+                      <Activity className="w-4 h-4 text-[#00A8E8]" />
+                      <span>拖动滑块选择生理周期天数：</span>
+                      <span className="text-xl font-black text-[#00A8E8]">Day {cycleDay}</span>
+                    </label>
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-bold ${
+                        cycleData.isLowHormone
+                          ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                          : 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                      }`}
+                    >
+                      {cycleData.subPhase}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="28"
+                    value={cycleDay}
+                    onChange={(e) => setCycleDay(Number(e.target.value))}
+                    className="w-full h-3 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-[#00A8E8]"
+                  />
+                  <div className="flex justify-between text-[11px] font-mono text-zinc-400">
+                    <span>Day 1 (月经开始/低激素卵泡期)</span>
+                    <span>Day 14 (排卵日 Ovulation)</span>
+                    <span>Day 22–28 (高激素黄体峰值/PMS)</span>
+                  </div>
+                </div>
+
+                {/* 体重输入切换 */}
+                <div className="lg:col-span-4 bg-[#181B1F] p-4 rounded-lg border border-zinc-700 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-zinc-300">输入您的体重 (实时换算营养剂量)：</span>
+                    <div className="flex rounded overflow-hidden border border-zinc-700 text-xs">
+                      <button
+                        onClick={() => {
+                          if (weightUnit === 'kg') {
+                            setAthleteWeightLb(Math.round(athleteWeightLb * 2.20462));
+                            setWeightUnit('lb');
+                          }
+                        }}
+                        className={`px-2 py-0.5 font-bold ${
+                          weightUnit === 'lb' ? 'bg-[#009CDE] text-white' : 'bg-zinc-800 text-zinc-400'
+                        }`}
+                      >
+                        lb (磅)
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (weightUnit === 'lb') {
+                            setAthleteWeightLb(Math.round(athleteWeightLb / 2.20462));
+                            setWeightUnit('kg');
+                          }
+                        }}
+                        className={`px-2 py-0.5 font-bold ${
+                          weightUnit === 'kg' ? 'bg-[#009CDE] text-white' : 'bg-zinc-800 text-zinc-400'
+                        }`}
+                      >
+                        kg (公斤)
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="number"
+                      min="35"
+                      max="300"
+                      value={athleteWeightLb}
+                      onChange={(e) => setAthleteWeightLb(e.target.value)}
+                      className="w-24 bg-zinc-900 border border-zinc-700 rounded px-3 py-1.5 text-lg font-black text-[#00A8E8] focus:outline-none focus:border-[#00A8E8]"
+                    />
+                    <span className="text-xs text-zinc-400 font-mono">
+                      ≈ {effectiveWeightLb} lbs / {effectiveWeightKg} kg [P.40]
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 复刻原书 P.27 双层激素曲线图 (LH/FSH + Estrogen/Progesterone + 子宫内膜厚度) */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div className="lg:col-span-7 bg-[#F4F6F8] text-[#111315] rounded-xl p-5 border border-zinc-300 shadow-inner">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h4 className="font-black text-sm uppercase tracking-wider">
+                        YOUR CYCLE AT A GLANCE · 28天激素与内膜动态图谱
+                      </h4>
+                      <p className="text-xs text-zinc-600">
+                        点击图中任意位置或拖动上方滑块，观察 Day {cycleDay} 的四项激素波动 [P.26-27]
+                      </p>
+                    </div>
+                    <PageBadge pages="26-27" light />
+                  </div>
+
+                  <svg
+                    viewBox="0 0 580 280"
+                    className="w-full h-auto cursor-pointer select-none"
+                    onClick={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const clickX = ((e.clientX - rect.left) / rect.width) * 580;
+                      if (clickX >= 45 && clickX <= 555) {
+                        const day = Math.max(1, Math.min(28, Math.round(((clickX - 45) / 510) * 27) + 1));
+                        setCycleDay(day);
+                      }
+                    }}
+                  >
+                    {/* 左右半区背景色：Follicular (Low Hormone) vs Luteal (High Hormone) */}
+                    <rect x="45" y="15" width="255" height="230" fill="#E0F2FE" opacity="0.55" />
+                    <rect x="300" y="15" width="255" height="230" fill="#FEF3C7" opacity="0.45" />
+
+                    {/* 排卵中线 Day 14 */}
+                    <line x1="300" y1="15" x2="300" y2="245" stroke="#0F172A" strokeWidth="1.5" strokeDasharray="5,4" />
+                    <text x="172" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#0369A1">
+                      卵泡期 Follicular Phase (低激素 Day 1–14)
+                    </text>
+                    <text x="428" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#B45309">
+                      黄体期 Luteal Phase (高激素 Day 15–28)
+                    </text>
+
+                    {/* 网格横线 */}
+                    {[50, 90, 130, 175, 215].map((y) => (
+                      <line key={y} x1="45" y1={y} x2="555" y2={y} stroke="#CBD5E1" strokeWidth="1" />
+                    ))}
+
+                    {/* LH 排卵峰值曲线 (虚线蓝) */}
+                    <path
+                      d="M45,95 Q180,100 260,95 Q282,20 300,65 Q320,98 555,98"
+                      fill="none"
+                      stroke="#0284C7"
+                      strokeWidth="2"
+                      strokeDasharray="4,2"
+                    />
+                    <text x="275" y="42" fontSize="10" fontWeight="bold" fill="#0284C7">
+                      LH Ovulation Surge
+                    </text>
+
+                    {/* Estrogen 雌激素曲线 (深青蓝实线填充) */}
+                    <path
+                      d="M45,195 C110,195 180,165 245,115 C265,100 278,105 292,165 C310,185 350,130 420,130 C480,130 520,185 555,195 L555,205 L45,205 Z"
+                      fill="#009CDE"
+                      fillOpacity="0.25"
+                    />
+                    <path
+                      d="M45,195 C110,195 180,165 245,115 C265,100 278,105 292,165 C310,185 350,130 420,130 C480,130 520,185 555,195"
+                      fill="none"
+                      stroke="#0077A8"
+                      strokeWidth="3"
+                    />
+
+                    {/* Progesterone 孕酮曲线 (琥珀橙红高拱线，黄体期超越雌激素) */}
+                    <path
+                      d="M45,198 L295,198 C335,195 360,102 425,102 C485,102 525,180 555,196 L555,205 L45,205 Z"
+                      fill="#F59E0B"
+                      fillOpacity="0.28"
+                    />
+                    <path
+                      d="M45,198 L295,198 C335,195 360,102 425,102 C485,102 525,180 555,196"
+                      fill="none"
+                      stroke="#D97706"
+                      strokeWidth="3.5"
+                    />
+
+                    {/* 底部子宫内膜示意 (Menstrual fluid / Uterine lining) */}
+                    <path
+                      d="M45,222 Q80,238 125,235 Q220,228 300,220 Q420,208 490,212 Q535,218 555,228 L555,245 L45,245 Z"
+                      fill="#94A3B8"
+                      opacity="0.45"
+                    />
+                    <text x="55" y="240" fontSize="9" fontWeight="bold" fill="#334155">
+                      子宫内膜厚度 (Uterine Lining)
+                    </text>
+
+                    {/* X轴天数刻度 */}
+                    {[1, 4, 7, 10, 14, 18, 21, 24, 28].map((d) => {
+                      const x = 45 + ((d - 1) / 27) * 510;
+                      return (
+                        <text key={d} x={x} y="264" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E293B">
+                          D{d}
+                        </text>
+                      );
+                    })}
+
+                    {/* 当前选中天数指示器 */}
+                    {(() => {
+                      const curX = 45 + ((cycleDay - 1) / 27) * 510;
+                      return (
+                        <g>
+                          <line x1={curX} y1="15" x2={curX} y2="245" stroke="#E11D48" strokeWidth="2.5" />
+                          <circle cx={curX} cy="15" r="5" fill="#E11D48" />
+                          <rect x={Math.min(505, Math.max(45, curX - 28))} y="4" width="56" height="18" rx="4" fill="#E11D48" />
+                          <text
+                            x={Math.min(533, Math.max(73, curX))}
+                            y="16"
+                            textAnchor="middle"
+                            fontSize="10"
+                            fontWeight="bold"
+                            fill="#FFFFFF"
+                          >
+                            Day {cycleDay}
+                          </text>
+                        </g>
+                      );
+                    })()}
+                  </svg>
+
+                  {/* 实时激素百分比进度条 */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-3 pt-3 border-t border-zinc-300">
+                    <div>
+                      <div className="flex justify-between text-xs font-bold">
+                        <span className="text-[#0077A8]">雌激素 Estrogen</span>
+                        <span>{cycleData.estrogen}%</span>
+                      </div>
+                      <div className="w-full h-2 bg-zinc-300 rounded-full mt-1 overflow-hidden">
+                        <div className="h-full bg-[#009CDE]" style={{ width: `${cycleData.estrogen}%` }} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-xs font-bold">
+                        <span className="text-amber-700">孕酮 Progesterone</span>
+                        <span>{cycleData.progesterone}%</span>
+                      </div>
+                      <div className="w-full h-2 bg-zinc-300 rounded-full mt-1 overflow-hidden">
+                        <div className="h-full bg-amber-500" style={{ width: `${cycleData.progesterone}%` }} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-xs font-bold">
+                        <span className="text-sky-700">黄体生成素 LH</span>
+                        <span>{cycleData.lh}%</span>
+                      </div>
+                      <div className="w-full h-2 bg-zinc-300 rounded-full mt-1 overflow-hidden">
+                        <div className="h-full bg-sky-500" style={{ width: `${cycleData.lh}%` }} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-xs font-bold">
+                        <span className="text-indigo-700">促卵泡激素 FSH</span>
+                        <span>{cycleData.fsh}%</span>
+                      </div>
+                      <div className="w-full h-2 bg-zinc-300 rounded-full mt-1 overflow-hidden">
+                        <div className="h-full bg-indigo-500" style={{ width: `${cycleData.fsh}%` }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 右侧：Day X 专属生理状态与营养处方 [P.28-41] */}
+                <div className="lg:col-span-5 space-y-4">
+                  <div className="p-5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono text-[#00A8E8] uppercase">{cycleData.phaseNameEn}</span>
+                      <PageBadge pages="28-32" />
+                    </div>
+                    <h4 className="text-lg font-black text-white">
+                      Day {cycleDay} 生理机制解析：{cycleData.subPhase}
+                    </h4>
+                    <p className="text-sm text-zinc-300 leading-relaxed">{cycleData.summary}</p>
+                    <div className="p-3 rounded-lg bg-[#009CDE]/10 border border-[#009CDE]/30 text-xs text-sky-200 leading-relaxed">
+                      <strong>训练建议：</strong> {cycleData.trainingAdvice}
+                    </div>
+                  </div>
+
+                  {/* 个性化周期营养与经前救援行动方案 (Action Plan for Power Regardless of Your Period) [P.40] */}
+                  <div className="p-5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                        <Flame className="w-4 h-4 text-[#00A8E8]" />
+                        <span>基于您体重 ({effectiveWeightLb} lb) 的精准周期处方</span>
+                      </h4>
+                      <PageBadge pages="40" />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="p-3 rounded-lg bg-[#181B1F] border border-zinc-800">
+                        <div className="text-[11px] text-zinc-400">运动中每小时碳水补充</div>
+                        <div className="text-2xl font-black text-[#00A8E8] mt-0.5">{cycleData.carbPerHour} g/hr</div>
+                        <div className="text-[11px] text-zinc-400">
+                          {cycleData.isLowHormone
+                            ? '低激素期标准: 0.35 g/lb/hr [P.40]'
+                            : '高激素期上调: 0.45 g/lb/hr [P.40]'}
+                        </div>
+                      </div>
+                      <div className="p-3 rounded-lg bg-[#181B1F] border border-zinc-800">
+                        <div className="text-[11px] text-zinc-400">全天蛋白质总目标</div>
+                        <div className="text-2xl font-black text-white mt-0.5">
+                          {cycleData.dailyProteinMin}–{cycleData.dailyProteinMax} g
+                        </div>
+                        <div className="text-[11px] text-zinc-400">训后30分内必补 20–25g [P.40]</div>
+                      </div>
+                    </div>
+
+                    {/* 经前7天 PMS 巅峰救援清单 [P.31, P.40] */}
+                    <div className="p-3.5 rounded-lg bg-zinc-950 border border-zinc-800 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-amber-400">
+                          ★ 经前 7 天 (PMS) 夜间抗痉挛与抗水肿黄金配方：
+                        </span>
+                        <PageBadge pages="31, 40-41" />
+                      </div>
+                      <ul className="text-xs text-zinc-300 space-y-1">
+                        <li>
+                          • <strong>每晚睡前服用：</strong> 250mg 镁 (Magnesium) + 45mg 锌 (Zinc) + 80mg 低剂量阿司匹林 (Baby Aspirin，不可逆抑制前列腺素 PE-2，布洛芬无效！) + 1g Omega-3 脂肪酸（亚麻籽油/鱼油）[P.31, P.40]。
+                        </li>
+                        <li>
+                          • <strong>训前 30 分钟：</strong> 补充 5–7g 支链氨基酸 (BCAAs，富含亮氨酸 Leucine)，穿过血脑屏障阻断血清素引发的中枢疲劳与情绪低落 [P.32, P.40]。
+                        </li>
+                        <li>
+                          • <strong>预防经期偏头痛：</strong> 多吃富含一氧化氮 (Nitric Oxide, NO) 的甜菜根、石榴、西瓜和菠菜以缓冲血管收缩 [P.31]。
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* 避孕药警示框 [P.33-36] */}
+                    <div className="p-3 rounded-lg bg-rose-950/30 border border-rose-800/50 text-xs text-rose-200">
+                      <strong>口服避孕药 (The Pill) 警示 [P.33-36]：</strong> 复合口服避孕药会使肌肉训练增益降低 <strong>40%–60%</strong>、延缓恢复并增加长途旅行深静脉血栓 (DVT) 风险（见职业车手 Chloe McConville 肺栓塞案例 [P.35]）。若需避孕，Dr. Sims 首推局部作用的宫内节育器 (IUD) [P.36]。
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* =========================================================
+                INTERACTIVE 5: RED-S 相对能量不足红绿灯评估 & 更年期/孕期导航 [P.36-78]
+               ========================================================= */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* 左侧：RED-S 风险自测工具 [P.36-39] */}
+              <div className="lg:col-span-6 bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="px-2 py-0.5 rounded bg-[#009CDE] text-white text-[11px] font-black uppercase">
+                      Interactive Module 02
+                    </span>
+                    <h3 className="text-xl font-black text-white mt-1">
+                      RED-S (运动相对能量不足) 红绿灯风险评估模型
+                    </h3>
+                  </div>
+                  <PageBadge pages="36-39" />
+                </div>
+
+                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                  国际奥委会 (IOC) 已将传统的“女性运动员三联征 (Female Athlete Triad)”正式更名为<strong>运动相对能量不足 (Relative Energy Deficiency in Sport, RED-S)</strong> [P.37]。即便你的体脂率在 25%–30%，只要长期处于低热量或低碳水压力下，身体就会误判为“饥荒”而关闭生殖功能并储存脂肪 [P.37-38]。请勾选符合您的项：
+                </p>
+
+                <div className="space-y-2">
+                  {redsSymptoms.map((sym) => {
+                    const checked = redsSelected.includes(sym.id);
+                    return (
+                      <button
+                        key={sym.id}
+                        onClick={() => toggleReds(sym.id)}
+                        className={`w-full text-left p-3 rounded-lg border text-xs sm:text-sm flex items-start gap-3 transition-all ${
+                          checked
+                            ? sym.level === 'red'
+                              ? 'bg-rose-950/50 border-rose-500 text-rose-100'
+                              : 'bg-amber-950/40 border-amber-500 text-amber-100'
+                            : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800/70'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          readOnly
+                          className="mt-1 accent-[#00A8E8]"
+                        />
+                        <span>{sym.text}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* 红绿灯诊断结果卡片 */}
+                <div
+                  className={`p-4 rounded-xl border-2 ${
+                    redsStatus.color === 'red'
+                      ? 'bg-rose-950/40 border-rose-500 text-rose-100'
+                      : redsStatus.color === 'yellow'
+                      ? 'bg-amber-950/40 border-amber-500 text-amber-100'
+                      : 'bg-emerald-950/40 border-emerald-500 text-emerald-100'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-black text-sm uppercase tracking-wider">{redsStatus.badge}</span>
+                    <PageBadge pages="38-39" />
+                  </div>
+                  <div className="text-xs font-bold underline mb-1.5">{redsStatus.clearance}</div>
+                  <p className="text-xs leading-relaxed opacity-90">{redsStatus.desc}</p>
+                </div>
+              </div>
+
+              {/* 右侧：第3章《跨越更年期》与第4章《孕期运动》切换导航 [P.43-78] */}
+              <div className="lg:col-span-6 bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-5">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex rounded-lg bg-zinc-900 p-1 border border-zinc-800">
+                    <button
+                      onClick={() => setLifeStageTab('menopause')}
+                      className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+                        lifeStageTab === 'menopause' ? 'bg-[#009CDE] text-white' : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      Ch.3 围绝经期与更年期 [P.43-62]
+                    </button>
+                    <button
+                      onClick={() => setLifeStageTab('pregnancy')}
+                      className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+                        lifeStageTab === 'pregnancy' ? 'bg-[#009CDE] text-white' : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      Ch.4 孕期运动科学 [P.63-78]
+                    </button>
+                  </div>
+                  <PageBadge pages={lifeStageTab === 'menopause' ? '43-62' : '63-78'} />
+                </div>
+
+                {lifeStageTab === 'menopause' ? (
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-black text-white">
+                      跨越更年期 (Moving Through Menopause)：6大生理转变与对策
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                      更年期后女性对<strong>果糖 (Fructose)</strong> 代谢能力大幅下降，多余果糖无法储存为皮下脂肪，而是直接变成血液中的游离脂肪酸引发高甘油三酯与胰岛素抵抗 [P.43]。同时肌肉蛋白分解速度超过合成速度，静息运动脂肪氧化率下降 23%–33% [P.48-49]。
+                    </p>
+
+                    {/* 乳清蛋白 vs 大豆蛋白对比可视化 [P.53, P.60] */}
+                    <div className="p-4 rounded-xl bg-zinc-900 border border-[#009CDE]/40 space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs font-bold text-[#38BDF8]">
+                          拒绝大豆蛋白陷阱 (Looking at you, Soy Protein!)
+                        </span>
+                        <PageBadge pages="10, 53, 60" />
+                      </div>
+                      <p className="text-xs text-zinc-300">
+                        需要 <strong>50g 大豆蛋白 (Soy Protein)</strong> 才能达到 <strong>25g 乳清蛋白 (Whey Protein)</strong> 的肌肉合成生物效应！因为触发肌肉修复开关必须要有充足的<strong>亮氨酸 (Leucine，每餐需 2.5–3g)</strong> [P.53]。
+                      </p>
+                      <div className="grid grid-cols-2 gap-2 text-xs pt-1">
+                        <div className="p-2 rounded bg-emerald-950/40 border border-emerald-700/50 text-emerald-200">
+                          ✓ <strong>训前30分：</strong> 15g 分离乳清蛋白 或 9g BCAAs [P.60]
+                        </div>
+                        <div className="p-2 rounded bg-emerald-950/40 border border-emerald-700/50 text-emerald-200">
+                          ✓ <strong>训后30分 & 2小时：</strong> 25g 乳清+酪蛋白混合 [P.60]
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 更年期助眠三大天然法宝 [P.51-52] */}
+                    <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                          <Moon className="w-4 h-4 text-[#00A8E8]" />
+                          <span>攻克 60% 更年期失眠与夜间盗汗的天然方案</span>
+                        </span>
+                        <PageBadge pages="50-52" />
+                      </div>
+                      <ul className="text-xs text-zinc-300 space-y-1.5">
+                        <li>
+                          1. <strong>蒙特莫伦西酸樱桃浓缩汁 (Montmorency Tart Cherry Juice)：</strong> 睡前30分钟喝一杯冰镇酸樱桃汁，天然提升褪黑素、抗炎并降低核心体温 [P.52]。
+                        </li>
+                        <li>
+                          2. <strong>缬草根提取物 (Valerian Root, 400mg)：</strong> 缩短入睡潜伏期，且无直接服用褪黑素的次日宿醉感 [P.51-52]。
+                        </li>
+                        <li>
+                          3. <strong>黑升麻 (Black Cohosh)：</strong> 缓解潮热 (Hot Flashes) 与血管舒缩症状的北美草本方案 [P.52]。
+                        </li>
+                        <li>
+                          4. <strong>打破久坐惯性：</strong> 雌激素下降会使自发活动量每日减少约 230 kcal；每坐 1 小时起身轻度活动 <strong>2 分钟</strong>，即可降低 33% 早亡风险 [P.61]！
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-black text-white">
+                      孕期无需暂停键 (Pregnant Pause?)：Dr. Sims 孕期参加 XTerra 世锦赛获前十名！
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                      Stacy Sims 博士在备战夏威夷茂宜岛 XTerra 越野铁三世锦赛前夕意外发现怀孕，凭借对女性体温调节与营养的掌控安全完赛并斩获前十 [P.63]！1985年旧指南“心率不超过140、运动不超过15分钟”早已作废 [P.64]。孕期规律运动可使母体最大摄氧量 (VO₂max) 额外提升 <strong>8%–10%</strong>，降低 24% 妊娠糖尿病风险，并直接增强胎儿血管弹性与代谢健康 [P.64, P.66]！
+                    </p>
+
+                    {/* 孕期三大核心辟谣与准则 [P.65, P.70-75] */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                      <div className="p-3 rounded-lg bg-zinc-900 border border-zinc-800 space-y-1">
+                        <div className="flex justify-between">
+                          <strong className="text-[#38BDF8]">不是“吃两人份”！</strong>
+                          <PageBadge pages="74-75" />
+                        </div>
+                        <p className="text-zinc-300">
+                          孕期肠道吸收效率会自动提升！孕早期每天仅需额外增加约 <strong>100 kcal</strong>，孕中晚期每天仅需额外 <strong>300 kcal</strong>（不含运动消耗），蛋白质每日需 75–100g，叶酸 600mcg [P.74-76]。
+                        </p>
+                      </div>
+                      <div className="p-3 rounded-lg bg-zinc-900 border border-zinc-800 space-y-1">
+                        <div className="flex justify-between">
+                          <strong className="text-amber-400">动作安全红线</strong>
+                          <PageBadge pages="65, 73" />
+                        </div>
+                        <p className="text-zinc-300">
+                          孕4个月后避免<strong>仰卧位 (Supine position)</strong> 运动以防压迫下腔静脉；严禁憋气用力的<strong>瓦氏动作 (Valsalva maneuver)</strong>；用侧平板支撑 (Side Planks) 替代卷腹 [P.65, P.73]。
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* 孕前 BMI 与推荐增重表 [P.67] */}
+                    <div className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-xs font-bold text-white">IOM 孕期健康增重标准与真实运动员案例对比</span>
+                        <PageBadge pages="67, 73-74" />
+                      </div>
+                      <p className="text-xs text-zinc-400 leading-relaxed">
+                        正常 BMI (18.5–24.9) 推荐总增重 <strong>25–35 磅</strong> [P.67]。书中记录了一位突然大幅减量至低强度散步的铁三运动员反而增重41磅并患上妊娠糖尿病、紧急剖腹产；而保持原有训练习惯（仅调低强度与冲击）的精英跑者与骑手均顺产健康宝宝并在产后2-3周恢复运动 [P.73-74]！
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <RoarSoundBites
+              title="Part I 生理与周期精粹"
+              page="24, 42, 62, 78"
+              items={[
+                '女性拥有更多必需脂肪 (Essential Fat 约12% vs 男性4%)，瘦体重集中在下半身，且 I 型慢肌纤维体积更大，天生适合耐力与高海拔燃脂 [P.13-14, P.24]。',
+                '按除脂体重 (Fat-free mass) 计算，受过良好训练的女性与男性的功率输出差距仅为 2.5%，几乎平起平坐 [P.18]！',
+                '典型28天周期分为低激素卵泡期 (Days 1–14) 与高激素黄体期 (Days 15–28)；月经来潮及卵泡期你的运动生理最像男性，痛觉低、力量涨最快 [P.28, P.42]。',
+                '高激素黄体期血浆容量下降高达 8%，核心体温升高，务必通过饮食时间窗（训前 BCAAs、训后30分钟乳清蛋白、夜晚高钠鸡汤预水合）抵消副作用 [P.30-31, P.42]。'
+              ]}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* =====================================================================
+          PART II: YOUR FEMALE FITNESS FOUNDATION [P.79-156]
+         ===================================================================== */}
+      {showSection('part2') && (
+        <section className="py-16 border-b border-zinc-800 bg-[#14171A]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            {/* Part II 标题横幅 */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#009CDE] pb-4 gap-4">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="px-3 py-1 bg-gradient-to-r from-zinc-800 to-zinc-900 border border-zinc-700 text-white font-black tracking-[0.25em] text-sm uppercase">
+                    PART II
+                  </span>
+                  <PageBadge pages="79-156" />
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-black text-white mt-2 tracking-tight">
+                  打造女性体能基石 · <span className="text-[#00A8E8]">Your Female Fitness Foundation</span>
+                </h2>
+              </div>
+              <p className="text-sm text-zinc-400 max-w-md">
+                涵盖第5章《理想体重与体型》、第6章《核心稳定与灵活性》、第7章《爆发力训练》、第8章《肠道菌群》与第9章《强健骨骼》[P.4]。
+              </p>
+            </div>
+
+            {/* =========================================================
+                INTERACTIVE 3: 三大体型 (Somatotype) 营养方案与肘宽骨架测量器 [P.80-95]
+               ========================================================= */}
+            <div className="bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-8">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+                <div>
+                  <span className="px-2.5 py-0.5 rounded bg-[#009CDE] text-white text-xs font-black uppercase">
+                    Interactive Module 03
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
+                    Ch.5 告别体重秤执念：三大体型 (Somatotype) 定制食谱 & 肘宽骨架计算器
+                  </h3>
+                </div>
+                <PageBadge pages="80-95" />
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                {/* 左侧：三大体型切换与全天食谱 [P.82-88] */}
+                <div className="lg:col-span-7 space-y-5">
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(somatotypeDetails).map(([key, item]) => (
+                      <button
+                        key={key}
+                        onClick={() => setSelectedSomatotype(key)}
+                        className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-black transition-all ${
+                          selectedSomatotype === key
+                            ? 'bg-[#009CDE] text-white shadow-[0_0_15px_rgba(0,156,222,0.4)]'
+                            : 'bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white'
+                        }`}
+                      >
+                        {item.name}
+                      </button>
+                    ))}
+                  </div>
+
+                  {(() => {
+                    const cur = somatotypeDetails[selectedSomatotype];
+                    return (
+                      <div className="p-5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="text-xl font-black text-white">{cur.name}</h4>
+                            <p className="text-xs text-[#38BDF8] font-bold mt-0.5">{cur.tagline}</p>
+                          </div>
+                          <PageBadge pages={cur.page} />
+                        </div>
+                        <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">{cur.traits}</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                          <div className="p-3 rounded-lg bg-[#181B1F] border border-zinc-800">
+                            <strong className="text-[#00A8E8] block mb-1">训练重心 (Training Focus)：</strong>
+                            <span className="text-zinc-300">{cur.training}</span>
+                          </div>
+                          <div className="p-3 rounded-lg bg-[#181B1F] border border-zinc-800">
+                            <strong className="text-emerald-400 block mb-1">营养法则 (Fueling Rule)：</strong>
+                            <span className="text-zinc-300">{cur.nutrition}</span>
+                          </div>
+                        </div>
+
+                        <div className="space-y-2 pt-2">
+                          <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider">
+                            原书定制一日食谱范例 (Sample Meal Plan) [P.{cur.page}]：
+                          </div>
+                          {cur.meals.map((m, i) => (
+                            <div
+                              key={i}
+                              className="flex flex-col sm:flex-row sm:items-center justify-between p-2.5 rounded bg-[#181B1F] border border-zinc-800/80 text-xs gap-1"
+                            >
+                              <span className="font-mono font-bold text-[#38BDF8] shrink-0">{m.time}</span>
+                              <span className="text-zinc-300 sm:text-right">{m.food}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })()}
+
+                  {/* 5条黄金减脂原则 + Cammie Urban 案例 [P.88-92] */}
+                  <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 text-xs text-zinc-300 space-y-1.5">
+                    <div className="flex justify-between items-center">
+                      <strong className="text-white text-sm">
+                        为什么“每天多吃 1,000 千卡”反而变精瘦并夺得大师赛世界冠军？
+                      </strong>
+                      <PageBadge pages="89, 91-93" />
+                    </div>
+                    <p className="leading-relaxed">
+                      48岁的山地车手 Cammie Urban 原本每天节食只吃 1,300 kcal 却不断流失肌肉且减不下脂；Dr. Sims 将她的饮食翻倍提升至 <strong>2,300 kcal/天</strong>（早餐钢切燕麦+蛋白粉、把热量前置到上午、训后30分钟内立刻补充蛋白质压制皮质醇），结果她体脂率大幅下降、功率暴涨，一举拿下 2015 大师组世界冠军 [P.91]！<strong>记住：1磅脂肪不等于3500千卡（实际更接近4200千卡且受激素调控），绝对不要间歇性禁食 (Don’t Fast) [P.89]！</strong>
+                    </p>
+                  </div>
+                </div>
+
+                {/* 右侧：肘宽骨架测量器 (Fit Your Frame Calculator) [P.90-91] */}
+                <div className="lg:col-span-5 bg-zinc-900 rounded-xl p-5 border border-zinc-800 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="text-lg font-black text-white flex items-center gap-2">
+                        <Scale className="w-5 h-5 text-[#00A8E8]" />
+                        <span>Fit Your Frame · 肘部骨宽与健康体重计算器</span>
+                      </h4>
+                      <p className="text-xs text-zinc-400 mt-0.5">
+                        “大骨架 (Big boned)”是真实存在的解剖差异！同身高健康体重可相差35磅 [P.90]。
+                      </p>
+                    </div>
+                    <PageBadge pages="90-91" />
+                  </div>
+
+                  <div className="p-3.5 rounded-lg bg-[#181B1F] border border-zinc-800 text-xs text-zinc-300 leading-relaxed">
+                    <strong>测量方法 [P.90]：</strong> 手臂弯曲呈 90 度，掌心朝向自己。用另一只手的拇指与食指卡住肘关节外侧两块凸起的小骨头 (髁状突)，测量两指间的距离（英寸）。
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between text-xs font-bold mb-1">
+                        <span>1. 选择您的身高 (Height)：</span>
+                        <span className="text-[#00A8E8] font-mono">
+                          {currentFrameResult.row.ht} (约 {currentFrameResult.row.cm} cm)
+                        </span>
+                      </div>
+                      <input
+                        type="range"
+                        min="0"
+                        max={heightWeightTable.length - 1}
+                        value={heightIdx}
+                        onChange={(e) => setHeightIdx(Number(e.target.value))}
+                        className="w-full h-2.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-[#00A8E8]"
+                      />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-xs font-bold mb-1">
+                        <span>2. 选择您的肘部骨宽 (Elbow Breadth)：</span>
+                        <span className="text-[#00A8E8] font-mono">
+                          {elbowInch.toFixed(2)}" (约 {(elbowInch * 2.54).toFixed(1)} cm)
+                        </span>
+                      </div>
+                      <input
+                        type="range"
+                        min="1.9"
+                        max="3.0"
+                        step="0.05"
+                        value={elbowInch}
+                        onChange={(e) => setElbowInch(Number(e.target.value))}
+                        className="w-full h-2.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-[#00A8E8]"
+                      />
+                      <div className="flex justify-between text-[11px] text-zinc-500 font-mono mt-1">
+                        <span>&lt; {currentFrameResult.row.minElbow}" 小骨架</span>
+                        <span>
+                          {currentFrameResult.row.minElbow}"–{currentFrameResult.row.maxElbow}" 中骨架
+                        </span>
+                        <span>&gt; {currentFrameResult.row.maxElbow}" 大骨架</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 计算结果展示 */}
+                  <div className="p-4 rounded-xl bg-gradient-to-br from-[#009CDE]/20 to-zinc-950 border border-[#009CDE] space-y-2">
+                    <div className="text-xs text-sky-300 font-mono uppercase">Frame Analysis Result [P.90-91]</div>
+                    <div className="flex items-baseline justify-between">
+                      <span className="text-sm font-bold text-white">您的骨架类型：</span>
+                      <span className="text-lg font-black text-[#38BDF8]">{currentFrameResult.size}</span>
+                    </div>
+                    <div className="flex items-baseline justify-between">
+                      <span className="text-sm font-bold text-white">推荐健康体重区间：</span>
+                      <span className="text-2xl font-black text-white">
+                        {currentFrameResult.rangeLb} lbs{' '}
+                        <span className="text-xs font-normal text-zinc-300">({currentFrameResult.rangeKg})</span>
+                      </span>
+                    </div>
+                    <div className="text-[11px] text-zinc-300 pt-2 border-t border-zinc-800">
+                      体脂率参考标准 [P.83]：必需脂肪 10–12% ｜ 运动员 12–22% ｜ 良好健身状态 16–25% ｜ 健康范围 18–30%。
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* =========================================================
+                INTERACTIVE 4: Ch.6 & Ch.7 核心稳定、ACL 8项筛查、6步脊柱锁定与原书动作插画库 [P.96-138]
+               ========================================================= */}
+            <div className="space-y-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                {/* 左侧：Laura Ramus 8点 ACL 损伤风险筛查 [P.105-106] */}
+                <div className="lg:col-span-6 bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="px-2 py-0.5 rounded bg-[#009CDE] text-white text-[11px] font-black uppercase">
+                        Interactive Module 04
+                      </span>
+                      <h3 className="text-xl font-black text-white mt-1">
+                        Ch.6 What’s Your ACL Risk? 膝关节前交叉韧带8点自测
+                      </h3>
+                    </div>
+                    <PageBadge pages="96-106" />
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    扔掉仰卧起坐和卷腹 (Kick the crunches to the curb)！平板支撑对腹肌的激活是传统卷腹的 <strong>2 倍</strong>，而臀部才是你双腿的“方向盘 (Steering Wheel)” [P.97]。研究显示，执行 PEP 预防训练的佩珀代因大学女篮将 ACL 撕裂率降低了 <strong>100%</strong> [P.98]！勾选您存在的风险信号：
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {aclScreeningItems.map((item) => {
+                      const active = checkedAclIds.includes(item.id);
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => toggleAclCheck(item.id)}
+                          className={`p-3 rounded-xl border text-left transition-all ${
+                            active
+                              ? 'bg-[#009CDE]/15 border-[#00A8E8] text-white'
+                              : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-1 mb-1">
+                            <span className="text-xs font-black">{item.title}</span>
+                            <input type="checkbox" checked={active} readOnly className="accent-[#00A8E8]" />
+                          </div>
+                          <p className="text-[11px] leading-snug opacity-85">{item.desc}</p>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-between">
+                    <div>
+                      <div className="text-xs text-zinc-400">当前检出风险因子数量</div>
+                      <div className="text-lg font-black text-white">
+                        {checkedAclIds.length} / 8 项{' '}
+                        <span className="text-xs font-normal text-[#38BDF8]">
+                          ({checkedAclIds.length >= 3 ? '高风险：需立即强化臀肌与PEP落地训练' : '中低风险：保持臀部与核心激活'})
+                        </span>
+                      </div>
+                    </div>
+                    <PageBadge pages="105-106" />
+                  </div>
+                </div>
+
+                {/* 右侧：Dr. Kelly Starrett 6步脊柱中立锁定法 (Brace Yourself) & 高跟鞋警告 [P.106-108] */}
+                <div className="lg:col-span-6 bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-xs font-mono text-[#00A8E8] uppercase">
+                        Mobility Over Flexibility · Dr. Kelly Starrett
+                      </span>
+                      <h3 className="text-xl font-black text-white mt-0.5">
+                        “Brace Yourself” 6步脊柱中立位锁定交互教练
+                      </h3>
+                    </div>
+                    <PageBadge pages="106-108" />
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    女性拥有 <strong>3 块楔形腰椎</strong>（男性仅2块），虽便于孕期后倾平衡重心，但也容易导致骨盆前倾与腰椎过度弯曲 [P.107]。此外，每周穿 2 英寸以上高跟鞋 ≥5 天的女性，小腿肌纤维平均<strong>缩短 13%</strong>，跟腱<strong>增厚 22%</strong> [P.107]！每次力量训练前请按顺序点击演练以下 6 步锁定法：
+                  </p>
+
+                  {/* 6步按钮切换 */}
+                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                    {bracingSteps.map((st, idx) => (
+                      <button
+                        key={st.step}
+                        onClick={() => setActiveBracingStep(idx)}
+                        className={`py-2 px-1 rounded-lg text-xs font-black border transition-all ${
+                          activeBracingStep === idx
+                            ? 'bg-[#009CDE] border-[#38BDF8] text-white shadow-[0_0_12px_rgba(0,156,222,0.4)]'
+                            : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white'
+                        }`}
+                      >
+                        {st.step}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* 当前步骤详情卡片 */}
+                  <div className="p-5 rounded-xl bg-zinc-900 border-l-4 border-[#00A8E8] space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono font-bold text-[#38BDF8]">
+                        {bracingSteps[activeBracingStep].step} · {bracingSteps[activeBracingStep].en}
+                      </span>
+                      <PageBadge pages="108" />
+                    </div>
+                    <h4 className="text-lg font-black text-white">{bracingSteps[activeBracingStep].title}</h4>
+                    <p className="text-sm text-zinc-300 leading-relaxed">{bracingSteps[activeBracingStep].desc}</p>
+                    <div className="pt-2 flex justify-end">
+                      <button
+                        onClick={() => setActiveBracingStep((prev) => (prev + 1) % bracingSteps.length)}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-[#00A8E8] hover:underline"
+                      >
+                        <span>下一步动作要领</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Ch.7 Power Move Matrix 4周力量循环矩阵 [P.137] */}
+                  <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-black text-white uppercase tracking-wider">
+                        Ch.7 Power Move Matrix · 4周爆发力训练轮换矩阵
+                      </span>
+                      <PageBadge pages="110-137" />
+                    </div>
+                    <div className="grid grid-cols-4 gap-2">
+                      {[1, 2, 3, 4].map((w) => (
+                        <button
+                          key={w}
+                          onClick={() => setSelectedMatrixWeek(w)}
+                          className={`py-1.5 rounded text-xs font-bold ${
+                            selectedMatrixWeek === w
+                              ? 'bg-[#009CDE] text-white'
+                              : 'bg-[#181B1F] text-zinc-400 border border-zinc-800'
+                          }`}
+                        >
+                          WEEK {w}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="text-xs text-zinc-300 bg-[#181B1F] p-3 rounded-lg border border-zinc-800">
+                      {selectedMatrixWeek === 1 && 'Week 1 重点：3个自重动作 (Body-weight) + 2个跳跃 (Jumps) + 2个药球动作 (Medicine Ball) + 2个壶铃动作 (Kettlebell) [P.137]'}
+                      {selectedMatrixWeek === 2 && 'Week 2 重点：3个增强式跳跃 (Jumps) + 2个自重动作 + 2个药球动作 + 2个壶铃动作 [P.137]'}
+                      {selectedMatrixWeek === 3 && 'Week 3 重点：3个药球动作 (Medicine Ball，10–12磅) + 2个自重动作 + 2个跳跃 + 2个壶铃动作 [P.124, P.137]'}
+                      {selectedMatrixWeek === 4 && 'Week 4 重点：3个壶铃动作 (Kettlebell，每分钟燃脂高达14 kcal) + 2个药球动作 + 2个自重 + 2个跳跃 [P.130, P.137]'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ------------------------------------------
+                  原书 Ch.6 & Ch.7 标志性训练动作 SVG 视觉插画卡 [P.99-136]
+                 ------------------------------------------ */}
+              <div className="bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-6">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <span className="text-xs font-mono text-[#00A8E8] uppercase">
+                      Illustrated Exercise Library · 原书核心与爆发力训练图解
+                    </span>
+                    <h3 className="text-2xl font-black text-white mt-0.5">
+                      ROAR 核心稳定与大重量爆发力动作精选（复刻原书蓝黑示范插画）
+                    </h3>
+                  </div>
+                  <PageBadge pages="99-136" />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                  {/* Card 1: Walking Lunge / Pistol Squat [P.99, P.114] */}
+                  <div className="rounded-xl bg-[#F4F6F8] text-[#111315] p-4 border border-zinc-300 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-xs font-black uppercase bg-[#111315] text-white px-2 py-0.5 rounded">
+                          Pistol Squat & Lunge
+                        </span>
+                        <PageBadge pages="99, 114" light />
+                      </div>
+                      <svg viewBox="0 0 200 135" className="w-full h-32 bg-white rounded-lg border border-zinc-200 mb-3">
+                        <line x1="10" y1="120" x2="190" y2="120" stroke="#374151" strokeWidth="3" />
+                        {/* 单腿手枪深蹲女性剪影 */}
+                        <circle cx="95" cy="34" r="10" fill="#E0A684" />
+                        <path d="M98 44 L82 78" stroke="#009CDE" strokeWidth="12" strokeLinecap="round" />
+                        {/* 支撑右腿 */}
+                        <path d="M80 78 L105 95 L92 118" stroke="#E0A684" strokeWidth="9" strokeLinecap="round" fill="none" />
+                        {/* 前伸左腿 */}
+                        <path d="M82 78 L32 82" stroke="#E0A684" strokeWidth="9" strokeLinecap="round" />
+                        {/* 前平举双臂 */}
+                        <path d="M92 50 L40 48" stroke="#E0A684" strokeWidth="6" strokeLinecap="round" />
+                        <rect x="74" y="70" width="16" height="14" rx="3" fill="#111315" />
+                      </svg>
+                      <h4 className="font-black text-sm">单腿手枪深蹲与行进弓步</h4>
+                      <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
+                        强化臀大肌、股四头肌与单腿落地稳定性，严格保持前膝对准脚趾、杜绝膝内扣 [P.99, P.114]。
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Side Plank with Twist [P.102-105] */}
+                  <div className="rounded-xl bg-[#F4F6F8] text-[#111315] p-4 border border-zinc-300 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-xs font-black uppercase bg-[#111315] text-white px-2 py-0.5 rounded">
+                          Side Plank & Knee Dips
+                        </span>
+                        <PageBadge pages="102-105" light />
+                      </div>
+                      <svg viewBox="0 0 200 135" className="w-full h-32 bg-white rounded-lg border border-zinc-200 mb-3">
+                        <line x1="10" y1="120" x2="190" y2="120" stroke="#374151" strokeWidth="3" />
+                        {/* 侧平板支撑剪影 */}
+                        <circle cx="52" cy="52" r="9" fill="#E0A684" />
+                        <path d="M62 60 L60 118" stroke="#E0A684" strokeWidth="7" strokeLinecap="round" />
+                        <path d="M62 60 L65 18" stroke="#E0A684" strokeWidth="6" strokeLinecap="round" />
+                        <path d="M62 62 L105 78" stroke="#009CDE" strokeWidth="13" strokeLinecap="round" />
+                        <path d="M105 78 L168 115" stroke="#E0A684" strokeWidth="10" strokeLinecap="round" />
+                        <rect x="96" y="72" width="18" height="15" transform="rotate(22 96 72)" fill="#111315" />
+                      </svg>
+                      <h4 className="font-black text-sm">侧平板支撑与屈膝点地平板</h4>
+                      <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
+                        全方位激活深层腹横肌、腹斜肌与肩带稳定，孕期同样安全适用，彻底告别伤腰卷腹 [P.73, P.104]。
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card 3: Box Jump & Plyometrics [P.118-123] */}
+                  <div className="rounded-xl bg-[#F4F6F8] text-[#111315] p-4 border border-zinc-300 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-xs font-black uppercase bg-[#111315] text-white px-2 py-0.5 rounded">
+                          Plyometric Box Jump
+                        </span>
+                        <PageBadge pages="118-123" light />
+                      </div>
+                      <svg viewBox="0 0 200 135" className="w-full h-32 bg-white rounded-lg border border-zinc-200 mb-3">
+                        <line x1="10" y1="120" x2="190" y2="120" stroke="#374151" strokeWidth="3" />
+                        {/* 木质跳箱 (还原 P.123 跳箱) */}
+                        <polygon points="35,120 42,82 95,82 102,120" fill="#E5D3B3" stroke="#A88F68" strokeWidth="2" />
+                        <rect x="60" y="92" width="16" height="6" rx="3" fill="#374151" />
+                        {/* 跃起跳箱运动员 */}
+                        <circle cx="118" cy="24" r="9" fill="#E0A684" />
+                        <path d="M118 35 L132 64" stroke="#009CDE" strokeWidth="12" strokeLinecap="round" />
+                        <path d="M116 38 L75 36" stroke="#E0A684" strokeWidth="6" strokeLinecap="round" />
+                        <path d="M132 64 L105 72 L115 95" stroke="#E0A684" strokeWidth="9" strokeLinecap="round" fill="none" />
+                        <rect x="122" y="56" width="16" height="13" fill="#111315" />
+                      </svg>
+                      <h4 className="font-black text-sm">增强式跳箱与收腹跳 (Plyometrics)</h4>
+                      <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
+                        唤醒随年龄最易流失的 II 型快肌纤维，同时利用地面冲击力刺激成骨细胞、提升骨密度 [P.110, P.118, P.123]。
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card 4: Wall Ball & Kettlebell Swing [P.126-135] */}
+                  <div className="rounded-xl bg-[#F4F6F8] text-[#111315] p-4 border border-zinc-300 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-xs font-black uppercase bg-[#111315] text-white px-2 py-0.5 rounded">
+                          Kettlebell & Med Ball
+                        </span>
+                        <PageBadge pages="126-135" light />
+                      </div>
+                      <svg viewBox="0 0 200 135" className="w-full h-32 bg-white rounded-lg border border-zinc-200 mb-3">
+                        <line x1="10" y1="120" x2="190" y2="120" stroke="#374151" strokeWidth="3" />
+                        {/* 壶铃摇摆 (Kettlebell Swing, P.135) */}
+                        <circle cx="122" cy="30" r="9" fill="#E0A684" />
+                        <path d="M122 42 L122 76" stroke="#009CDE" strokeWidth="12" strokeLinecap="round" />
+                        <rect x="114" y="72" width="16" height="14" fill="#111315" />
+                        <path d="M122 86 L112 118" stroke="#E0A684" strokeWidth="9" strokeLinecap="round" />
+                        <path d="M122 46 L68 38" stroke="#E0A684" strokeWidth="6" strokeLinecap="round" />
+                        {/* 黑色壶铃在肩高处 */}
+                        <circle cx="52" cy="35" r="10" fill="#111315" />
+                        <path d="M58 35 L68 38" stroke="#111315" strokeWidth="4" />
+                      </svg>
+                      <h4 className="font-black text-sm">壶铃摇摆与药球推举 (Thruster/Swing)</h4>
+                      <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
+                        利用不稳定负重迫使全身核心协同发力，提高神经肌肉募集效率，实现“强壮但不臃肿” [P.19, P.130, P.135]。
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* =========================================================
+                INTERACTIVE 6 (Part A): Ch.8 肠道菌群平衡模拟器 & Ch.9 骨骼健康 [P.139-156]
+               ========================================================= */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* 左侧：Ch.8 肠道菌群模拟器 [P.139-149] */}
+              <div className="lg:col-span-7 bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="px-2 py-0.5 rounded bg-[#009CDE] text-white text-[11px] font-black uppercase">
+                      Interactive Module 05
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-black text-white mt-1">
+                      Ch.8 Go with Your Gut · 100万亿肠道菌群与渴望模拟器
+                    </h3>
+                  </div>
+                  <PageBadge pages="139-149" />
+                </div>
+
+                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                  人体肠道内驻扎着超过 <strong>100万亿 (100 Trillion)</strong> 微生物，是人体其他细胞总数的10倍 [P.10, P.140]！它们通过<strong>迷走神经 (Vagus Nerve)</strong> 直连大脑第10对脑神经，操控你的情绪、焦虑和深夜对巧克力的渴望 [P.141]。点击下方日常习惯开关，观察<strong>拟杆菌门 (Bacteroidetes，有助精瘦)</strong> 与<strong>厚壁菌门 (Firmicutes，促进脂肪储存)</strong> 的此消彼长 [P.140-141]：
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* 有益习惯 (Gut Builders) */}
+                  <div className="p-3.5 rounded-xl bg-zinc-900 border border-emerald-700/40 space-y-2">
+                    <div className="text-xs font-black text-emerald-400 uppercase">
+                      + 肠道菌群培育者 (Gut Builders) [P.142-145]
+                    </div>
+                    {[
+                      { key: 'probiotics', label: '发酵食品与 LAC 活性菌标章酸奶/Kefir/泡菜 (-4%体脂) [P.143]' },
+                      { key: 'prebiotics', label: '每日 ≥25g 膳食纤维与益生元 (微熟香蕉/芦笋/洋葱/大蒜/燕麦) [P.142-144]' },
+                      { key: 'tums', label: '高强度赛前20分钟嚼薄荷味 Tums (碳酸钙保护肠黏膜) [P.145]' }
+                    ].map((it) => (
+                      <label key={it.key} className="flex items-start gap-2 text-xs text-zinc-200 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={gutFactors[it.key]}
+                          onChange={() => setGutFactors((p) => ({ ...p, [it.key]: !p[it.key] }))}
+                          className="mt-0.5 accent-emerald-500"
+                        />
+                        <span>{it.label}</span>
+                      </label>
+                    ))}
+                  </div>
+
+                  {/* 肠道炸弹 (Gut Bombs) */}
+                  <div className="p-3.5 rounded-xl bg-zinc-900 border border-rose-700/40 space-y-2">
+                    <div className="text-xs font-black text-rose-400 uppercase">
+                      - 肠道菌群炸弹 (Gut Bombs) [P.145, P.147-148]
+                    </div>
+                    {[
+                      { key: 'nsaids', label: '运动前后服用布洛芬/萘普生 (NSAIDs，腐蚀肠黏膜导致肠漏 Leaky Gut) [P.145, P.147]' },
+                      { key: 'sweeteners', label: '人工甜味剂与代糖 (三氯蔗糖/糖醇，诱发葡萄糖不耐受) [P.147-148]' },
+                      { key: 'antibiotics', label: '滥用抗生素与抗菌洗护品 (无差别屠杀有益菌群) [P.147]' },
+                      { key: 'processed', label: '精制糖与深加工食品 (引爆厚壁菌门 Firmicutes 疯长) [P.148]' },
+                      { key: 'ocp', label: '长期口服避孕药 (改变肠道免疫反应，红斑狼疮风险+50%) [P.148]' }
+                    ].map((it) => (
+                      <label key={it.key} className="flex items-start gap-2 text-xs text-zinc-200 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={gutFactors[it.key]}
+                          onChange={() => setGutFactors((p) => ({ ...p, [it.key]: !p[it.key] }))}
+                          className="mt-0.5 accent-rose-500"
+                        />
+                        <span>{it.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 菌群比例可视化进度条 */}
+                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2">
+                  <div className="flex justify-between text-xs font-bold">
+                    <span className="text-[#38BDF8]">
+                      拟杆菌门 Bacteroidetes (自耗糖分/精瘦菌): {gutSimulation.bacteroidetesPct}%
+                    </span>
+                    <span className="text-amber-400">
+                      厚壁菌门 Firmicutes (促脂储存菌): {gutSimulation.firmicutesPct}%
+                    </span>
+                  </div>
+                  <div className="w-full h-4 rounded-full bg-amber-500/80 overflow-hidden flex">
+                    <div
+                      className="h-full bg-gradient-to-r from-[#009CDE] to-emerald-400 transition-all duration-300"
+                      style={{ width: `${gutSimulation.bacteroidetesPct}%` }}
+                    />
+                  </div>
+                  <p className="text-xs text-zinc-300 pt-1">{gutSimulation.status}</p>
+                </div>
+              </div>
+
+              {/* 右侧：Ch.9 Build Your Bones 强健骨骼指南 [P.150-156] */}
+              <div className="lg:col-span-5 bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-xs font-mono text-[#00A8E8] uppercase">
+                      Chapter 9 · Build Your Bones
+                    </span>
+                    <h3 className="text-xl font-black text-white mt-0.5">
+                      强健骨骼：为什么狂喝牛奶与吃钙片可能没用？
+                    </h3>
+                  </div>
+                  <PageBadge pages="150-156" />
+                </div>
+
+                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                  全美 <strong>80% 的骨质疏松症 (Osteoporosis) 患者是女性</strong>，50岁以上女性每2人就有1人会因此发生骨折 [P.50, P.150]。骨骼在30–35岁达到峰值后开始流失，更年期后失去雌激素保护，骨流失速度从每年 0.5%–1% 飙升至 <strong>2%–3%/年（头5–7年可流失高达20%）</strong> [P.50, P.150]！
+                </p>
+
+                <div className="space-y-3 text-xs">
+                  <div className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-1">
+                    <div className="flex justify-between">
+                      <strong className="text-[#38BDF8]">1. 冲击力与负重训练是成骨关键 [P.151]</strong>
+                      <PageBadge pages="151" />
+                    </div>
+                    <p className="text-zinc-300">
+                      骑行和游泳对心肺极好，但<strong>无法刺激骨密度</strong>！必须每周加入 2–3 次大重量抗阻训练、跳跃 (Plyometrics) 或跑步，绝经后女性坚持力量训练每年仍可逆转提升约 1% 脊柱与髋部骨密度 [P.151]。
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-1">
+                    <div className="flex justify-between">
+                      <strong className="text-emerald-400">2. 维生素 D + 维生素 K 黄金搭档 [P.152-153]</strong>
+                      <PageBadge pages="152-153" />
+                    </div>
+                    <p className="text-zinc-300">
+                      哈佛大学大型研究显示，单纯狂喝牛奶或吃高剂量钙片并不能降低髋部骨折风险，单独补钙甚至可能沉积在动脉增加心脏病风险 [P.153, P.238]！真正确保骨质强健的是：从<strong>沙丁鱼、三文鱼、酸奶</strong>中获取食物钙，配合每日 <strong>1,000–5,000 IU 维生素 D₃</strong> 以及每日一份绿叶蔬菜提供的 <strong>90–120 mcg 维生素 K</strong>（每天一份生菜/西蓝花即可将髋部骨折风险减半）[P.153]！
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-rose-950/30 border border-rose-800/50 space-y-1">
+                    <div className="flex justify-between">
+                      <strong className="text-rose-300">3. 骨银行强盗 (Bone Bank Robbers) [P.153-155]</strong>
+                      <PageBadge pages="153-155" />
+                    </div>
+                    <p className="text-rose-200/90">
+                      • <strong>可乐 (Cola)：</strong> 含磷酸破坏钙磷平衡，弗雷明汉研究证实每天喝可乐的女性骨密度显著偏低 [P.154-155]。<br />
+                      • <strong>皮质醇偷窃 (Cortisol Steal)：</strong> 铁三选手 Jillian 虽月经规律却反复应力性骨折，血检发现高压训练与热量缺口使身体“偷走”孕酮去合成压力激素皮质醇，导致骨重塑停滞 [P.153-154]。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <RoarSoundBites
+              title="Part II 体能基石精粹"
+              page="95, 109, 138, 149, 156"
+              items={[
+                '别被体重秤上的数字绑架，身体成分 (Body Composition) 才是关键；严禁间歇性禁食，把碳水化合物前置到清晨与上午摄入 [P.95]。',
+                '臀肌与髋部是你双腿的“方向盘 (Steering Wheel)”，用平板支撑替代卷腹，追求关节主动控制力 (Mobility) 而非单纯柔韧松弛 (Flexibility) [P.109]。',
+                '30岁后不练力量的女性每十年流失 3% 肌肉；别怕大重量会让你变壮，应该害怕肌肉流失 [P.110, P.138]！',
+                '精瘦人群拥有更丰富多样的肠道菌群；远离代糖、NSAIDs止痛药与不必要抗生素 [P.149]。'
+              ]}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* =====================================================================
+          PART III: YOUR PLAN FOR PEAK PERFORMANCE [P.157-273]
+         ===================================================================== */}
+      {showSection('part3') && (
+        <section className="py-16 border-b border-zinc-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            {/* Part III 标题横幅 */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#009CDE] pb-4 gap-4">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className="px-3 py-1 bg-gradient-to-r from-zinc-800 to-zinc-900 border border-zinc-700 text-white font-black tracking-[0.25em] text-sm uppercase">
+                    PART III
+                  </span>
+                  <PageBadge pages="157-273" />
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-black text-white mt-2 tracking-tight">
+                  巅峰表现行动计划 · <span className="text-[#00A8E8]">Your Plan for Peak Performance</span>
+                </h2>
+              </div>
+              <p className="text-sm text-zinc-400 max-w-md">
+                涵盖第10–12章《日常营养、专项补给与科学水合》、第13–15章《极端环境、恢复与补剂》、第16–17章《大脑训练与生物黑客》及原书食谱附录 [P.4]。
+              </p>
+            </div>
+
+            {/* =========================================================
+                INTERACTIVE 2: 每日营养宏量、运动补给与高钠预水合计算器 [P.158-201]
+               ========================================================= */}
+            <div className="bg-gradient-to-b from-[#181B1F] to-[#14171A] rounded-2xl p-6 sm:p-8 border-2 border-[#009CDE]/50 shadow-[0_0_30px_rgba(0,156,222,0.12)] space-y-8">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+                <div>
+                  <span className="px-2.5 py-0.5 rounded bg-[#009CDE] text-white text-xs font-black uppercase">
+                    Interactive Module 06
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
+                    Ch.10–12 个人日常宏量营养、专项运动补给与水合计算器
+                  </h3>
+                </div>
+                <PageBadge pages="158-201" />
+              </div>
+
+              {/* 交互参数选择 */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-zinc-900 p-5 rounded-xl border border-zinc-800">
+                <div>
+                  <label className="text-xs font-bold text-zinc-300 block mb-1.5">
+                    1. 您的体重 ({weightUnit === 'lb' ? '磅 lbs' : '公斤 kg'})：
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      value={athleteWeightLb}
+                      onChange={(e) => setAthleteWeightLb(e.target.value)}
+                      className="w-28 bg-[#181B1F] border border-zinc-700 rounded px-3 py-1.5 text-lg font-black text-[#00A8E8]"
+                    />
+                    <span className="text-xs text-zinc-400 font-mono">
+                      ({effectiveWeightLb} lb / {effectiveWeightKg} kg)
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-zinc-300 block mb-1.5">
+                    2. 当日训练负荷类型 [P.166]：
+                  </label>
+                  <select
+                    value={trainingLoad}
+                    onChange={(e) => setTrainingLoad(e.target.value)}
+                    className="w-full bg-[#181B1F] border border-zinc-700 rounded px-3 py-2 text-xs sm:text-sm font-bold text-white"
+                  >
+                    <option value="light">力量/爆发力 (CrossFit) 或恢复日 (1.13–1.4g C/lb)</option>
+                    <option value="moderate">中高强度训练 1–2小时 (1.6–1.8g C/lb)</option>
+                    <option value="endurance">耐力训练 2–5小时 (2.0–2.7g C/lb)</option>
+                    <option value="extreme">极限耐力 5小时以上 Ironman (2.7–3.1g C/lb)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-zinc-300 block mb-1.5">
+                    3. 运动环境温度 [P.197]：
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => setAmbientTemp('cool')}
+                      className={`py-2 rounded text-xs font-bold border ${
+                        ambientTemp === 'cool'
+                          ? 'bg-[#009CDE] border-[#38BDF8] text-white'
+                          : 'bg-[#181B1F] border-zinc-700 text-zinc-400'
+                      }`}
+                    >
+                      ≤ 75°F (24°C) 温和
+                    </button>
+                    <button
+                      onClick={() => setAmbientTemp('warm')}
+                      className={`py-2 rounded text-xs font-bold border ${
+                        ambientTemp === 'warm'
+                          ? 'bg-amber-600 border-amber-400 text-white'
+                          : 'bg-[#181B1F] border-zinc-700 text-zinc-400'
+                      }`}
+                    >
+                      &gt; 80°F (27°C) 炎热
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* 计算输出面板 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-zinc-400">全天碳水化合物 (40%)</span>
+                    <PageBadge pages="159, 166" />
+                  </div>
+                  <div className="text-2xl font-black text-[#00A8E8] mt-1">
+                    {fuelingPlan.carbsMin}–{fuelingPlan.carbsMax} g
+                  </div>
+                  <p className="text-[11px] text-zinc-400 mt-1">
+                    大脑每天至少消耗 130g 碳水（占静息血糖60%），切勿低于底线 [P.159, P.161]！
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-zinc-400">全天优质蛋白质 (30%)</span>
+                    <PageBadge pages="165-166" />
+                  </div>
+                  <div className="text-2xl font-black text-emerald-400 mt-1">
+                    {fuelingPlan.proMin}–{fuelingPlan.proMax} g
+                  </div>
+                  <p className="text-[11px] text-zinc-400 mt-1">
+                    早餐必吃 25–30g 阻断晨起分解代谢；训后30分内补 25–30g [P.165, P.185]。
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-zinc-400">运动中每小时热量补给</span>
+                    <PageBadge pages="180" />
+                  </div>
+                  <div className="text-lg font-black text-white mt-1">
+                    跑步: {fuelingPlan.runCalsMin}–{fuelingPlan.runCalsMax} kcal/h
+                  </div>
+                  <div className="text-lg font-black text-[#38BDF8]">
+                    骑行: {fuelingPlan.bikeCalsMin}–{fuelingPlan.bikeCalsMax} kcal/h
+                  </div>
+                  <p className="text-[11px] text-zinc-400 mt-0.5">
+                    口袋装真实食物（咸小土豆/三明治块），远离能量胶 [P.181-183]！
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-zinc-400">每小时补液 & 咖啡因剂量</span>
+                    <PageBadge pages="162, 197" />
+                  </div>
+                  <div className="text-xl font-black text-[#00A8E8] mt-1">
+                    {fuelingPlan.fluidOzPerHour} oz ({fuelingPlan.fluidMlPerHour} ml)/h
+                  </div>
+                  <div className="text-xs font-bold text-amber-400 mt-0.5">
+                    训前咖啡因: {fuelingPlan.caffeineMin}–{fuelingPlan.caffeineMax} mg
+                  </div>
+                  <p className="text-[11px] text-zinc-400 mt-0.5">
+                    温和环境纯水勿超 27 oz/h 以防低钠血症 [P.197, P.201]。
+                  </p>
+                </div>
+              </div>
+
+              {/* 揭秘能量胶骗局 (The Trouble with Gels) 与 水合渗透压科学 [P.181-182, P.193-195] */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="p-5 rounded-xl bg-zinc-900 border border-rose-500/40 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-base font-black text-rose-300 flex items-center gap-2">
+                      <AlertTriangle className="w-5 h-5 text-rose-400" />
+                      <span>为什么必须对能量胶说 NO？(The Trouble with Gels)</span>
+                    </h4>
+                    <PageBadge pages="181-182" />
+                  </div>
+                  <p className="text-xs text-zinc-300 leading-relaxed">
+                    普通能量胶是高达 <strong>73% 浓度的碳水化合物溶液</strong>（主要由麦芽糊精 Maltodextrin 和果糖 Fructose 组成）[P.181-182]。它的渗透压远高于人体血浆正常渗透压 (275–295 mOsm) [P.193]。当你吞下能量胶时，小肠为了稀释高浓度糖液，反而会把宝贵的水分<strong>从血液倒抽回肠道</strong>，导致你越吃越脱水，并引发“果冻胃 (Goo Gut)”——水声晃荡、胀气、痉挛与腹泻 [P.182, P.194]！
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-xl bg-zinc-900 border border-[#00A8E8]/50 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-base font-black text-[#38BDF8] flex items-center gap-2">
+                      <Droplets className="w-5 h-5 text-[#00A8E8]" />
+                      <span>“口袋装食物，水壶装水合” & DIY 预水合配方</span>
+                    </h4>
+                    <PageBadge pages="31, 193-199" />
+                  </div>
+                  <p className="text-xs text-zinc-300 leading-relaxed">
+                    <strong>1. 理想运动水合饮料标准 (Winning Solution) [P.195]：</strong> 渗透压低于血液 (210–260 mOsm)，含 <strong>3%–4% 碳水溶液</strong>（每 8 oz 含 7–9.4g 葡萄糖+蔗糖，激活小肠钠-葡萄糖共转运体）、<strong>180–225mg 钠</strong>与 <strong>60–75mg 钾</strong>（而非市面 5%–8% 的高糖运动饮料）[P.194-195]。<br />
+                    <strong>2. 赛前一晚高钠超水合 (DIY Hyperhydration Preload) [P.31, P.199]：</strong> 每升水加入 <strong>7.7g 柠檬酸钠 (Sodium Citrate) + 4.5g 氯化钠 (Sodium Chloride)</strong>，主动提升血浆容量！
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* =========================================================
+                Ch.13–16 极端环境 (桑拿适应)、恢复误区 (抗氧化剂与冰浴)、补剂红黑榜与大脑训练 [P.202-249]
+               ========================================================= */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Ch.13 极端环境与桑拿训练 */}
+              <div className="bg-[#181B1F] rounded-2xl p-6 border border-zinc-800 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-[#00A8E8] uppercase">Ch.13 · Going to Extremes</span>
+                  <PageBadge pages="202-219" />
+                </div>
+                <h4 className="text-lg font-black text-white flex items-center gap-2">
+                  <Thermometer className="w-5 h-5 text-[#00A8E8]" />
+                  <span>桑拿训练 (Sauna Training) 与冷热适应</span>
+                </h4>
+                <ul className="text-xs text-zinc-300 space-y-2 leading-relaxed">
+                  <li>
+                    • <strong>7天桑拿适应法 [P.207-208]：</strong> 训练结束后30分钟内（先不大量喝水，保持适度脱水 Permissive Dehydration）进入 ≤165°F (74°C) 桑拿房静坐 25–30 分钟；肾脏感知低血容量与缺氧后会自然刺激 <strong>EPO 与血浆容量扩张</strong>，同时适应高温与高海拔！出桑拿后用 2–3 小时缓慢补水 [P.205-208]。
+                  </li>
+                  <li>
+                    • <strong>切勿往头上浇冰水 [P.207]！</strong> 头部血管丰富，冰水会导致血管剧烈收缩，反而把热血逼回核心；应喝冰沙 (Slushy) 并在前臂浇凉水 [P.206-207]。
+                  </li>
+                  <li>
+                    • <strong>雷诺氏综合征 (Raynaud’s) 与办公室空调 [P.209-212]：</strong> 女性手部温度比男性低近 3°F (87.2°F vs 90°F)；而写字楼空调标准是1960年代按40岁男性静息代谢设定的，高估了女性代谢率达 <strong>35%</strong> [P.209, P.212]！
+                  </li>
+                </ul>
+              </div>
+
+              {/* Ch.14 科学恢复与冰浴/抗氧化剂真相 */}
+              <div className="bg-[#181B1F] rounded-2xl p-6 border border-zinc-800 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-[#00A8E8] uppercase">Ch.14 · Recover Right</span>
+                  <PageBadge pages="220-232" />
+                </div>
+                <h4 className="text-lg font-black text-white flex items-center gap-2">
+                  <RefreshCw className="w-5 h-5 text-[#00A8E8]" />
+                  <span>女性需要冷水浴，但请推迟抗氧化剂！</span>
+                </h4>
+                <ul className="text-xs text-zinc-300 space-y-2 leading-relaxed">
+                  <li>
+                    • <strong>为什么女性适合冰浴/冷水浸泡 [P.221]？</strong> 男性运动后血管自然收缩，冰浴可能妨碍恢复；但女性运动后外周血管持续扩张、核心散热慢、动脉血压下降更明显，运动后冷水浸泡或穿降温背心能帮女性把血液推回核心循环、加速排酸修复 [P.221, P.232]！
+                  </li>
+                  <li>
+                    • <strong>运动后 4–5 小时内别吃抗氧化剂/莓果 [P.224-225]！</strong> 运动产生的自由基是刺激线粒体适应性增强的信号。训后立刻服用维生素 C、E 或高抗氧化莓果会削弱胰岛素敏感性与训练适应 [P.225, P.232]。
+                  </li>
+                  <li>
+                    • <strong>伤病制动期抗肌肉流失配方 [P.230-231]：</strong> 每天摄入 0.9–1.1g/lb 蛋白质（分4餐，每餐含 3g 亮氨酸）+ 每日 <strong>4g Omega-3 鱼油</strong>（早晚各2g），克服合成代谢抵抗 [P.231]。
+                  </li>
+                </ul>
+              </div>
+
+              {/* Ch.15 & Ch.16 补剂红黑榜与 Track Stack & 大脑训练 */}
+              <div className="bg-[#181B1F] rounded-2xl p-6 border border-zinc-800 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-[#00A8E8] uppercase">Ch.15–16 · Pills & Brain</span>
+                  <PageBadge pages="233-249" />
+                </div>
+                <h4 className="text-lg font-black text-white flex items-center gap-2">
+                  <Brain className="w-5 h-5 text-[#00A8E8]" />
+                  <span>补剂红名单、“赛道叠加以栈”与大脑连接</span>
+                </h4>
+                <ul className="text-xs text-zinc-300 space-y-2 leading-relaxed">
+                  <li>
+                    • <strong>四大真正有效的日常补剂 [P.234-237]：</strong> 铁剂（经期量大或铁蛋白低者，配合维C服用；绝经后勿盲目补铁）、维生素 D₃ (1,000–5,000 IU/天)、镁 (400mg/天)、β-丙氨酸 (Beta-alanine, 3.2–6.4g/天) 与甜菜根汁 (Beetroot Juice) [P.234-237]。
+                  </li>
+                  <li>
+                    • <strong>Dr. Sims 赛前 20 分钟“Track Stack”配方 [P.239-240]：</strong> 100mg 咖啡因 + 81mg 低剂量阿司匹林 + 1,500mg β-丙氨酸（体重 &gt;155 lb 者增至 150mg 咖啡因 + 2×81mg 阿司匹林 + 2,000mg β-丙氨酸）。
+                  </li>
+                  <li>
+                    • <strong>女性大脑左右半球连接更强 [P.243-246]：</strong> 女性血清素合成量仅为男性的约一半（切忌极低碳水饮食以免诱发抑郁）[P.243]；训练中需要明确“为什么要练这个课表 (Know the why)”，善用视觉化想象训练（单靠意念想象练二头肌12周即可提升13%力量）[P.244, P.246]！
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* =========================================================
+                INTERACTIVE 6 (Part B): Ch.17 Be Your Own Biohacker 尿检试纸与最大心率实验室 [P.250-261]
+               ========================================================= */}
+            <div className="bg-[#181B1F] rounded-2xl p-6 sm:p-8 border border-zinc-800 space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+                <div>
+                  <span className="px-2.5 py-0.5 rounded bg-[#009CDE] text-white text-xs font-black uppercase">
+                    Interactive Module 07
+                  </span>
+                  <h3 className="text-2xl font-black text-white mt-1">
+                    Ch.17 Be Your Own Biohacker · 10项尿检试纸 (Pee Sticks) 解读器 & 女性专属最大心率公式
+                  </h3>
+                </div>
+                <PageBadge pages="250-261" />
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                {/* 左侧：交互式尿检试纸 (Urinalysis Reagent Strip) */}
+                <div className="lg:col-span-7 space-y-4">
+                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    合著者 Selene Yeager 在加州爬坡间歇训练中利用尿检试纸 (Pee Sticks) 实时监测恢复与营养状态 [P.256]。点击下方试纸上的色块，查看原书各项生化指标的运动生理学解读 [P.254-255]：
+                  </p>
+
+                  {/* 仿真尿检试纸条 */}
+                  <div className="p-4 rounded-xl bg-[#F4F6F8] border border-zinc-300 flex items-center gap-3 overflow-x-auto">
+                    <span className="text-xs font-mono font-bold text-zinc-500 shrink-0">REAGENT STRIP ▶</span>
+                    {Object.values(peeStickMarkers).map((mk) => {
+                      const active = selectedPeeMarker === mk.code;
+                      const padColors = {
+                        SG: 'bg-amber-600',
+                        PRO: 'bg-emerald-500',
+                        KET: 'bg-purple-700',
+                        LEU: 'bg-fuchsia-600',
+                        BLO: 'bg-teal-600',
+                        PH: 'bg-orange-500'
+                      };
+                      return (
+                        <button
+                          key={mk.code}
+                          onClick={() => setSelectedPeeMarker(mk.code)}
+                          className={`px-3 py-2.5 rounded-lg border-2 flex flex-col items-center min-w-[72px] transition-all ${
+                            active
+                              ? 'border-[#111315] bg-white shadow-md scale-105'
+                              : 'border-transparent bg-zinc-200/70 hover:bg-white'
+                          }`}
+                        >
+                          <div className={`w-8 h-5 rounded ${padColors[mk.code]} mb-1 shadow-inner`} />
+                          <span className="text-xs font-black text-[#111315]">{mk.code}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* 选中试纸项详情 */}
+                  {(() => {
+                    const cur = peeStickMarkers[selectedPeeMarker];
+                    return (
+                      <div className="p-5 rounded-xl bg-zinc-900 border border-[#009CDE]/50 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-lg font-black text-white">
+                            {cur.code} · {cur.name}
+                          </h4>
+                          <PageBadge pages="254-256" />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
+                          <div className="p-2.5 rounded bg-emerald-950/40 border border-emerald-700/40 text-emerald-200">
+                            <strong>正常理想值：</strong> {cur.normal}
+                          </div>
+                          <div className="p-2.5 rounded bg-rose-950/40 border border-rose-700/40 text-rose-200">
+                            <strong>異常预警信号：</strong> {cur.warning}
+                          </div>
+                        </div>
+                        <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed pt-1">{cur.desc}</p>
+                      </div>
+                    );
+                  })()}
+                </div>
+
+                {/* 右侧：女性新最大心率公式 (211 - 0.64 × Age) 与心率区间 + 附录经典食谱 [P.252, P.262-273] */}
+                <div className="lg:col-span-5 space-y-4">
+                  <div className="p-5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-base font-black text-white">
+                        摒弃“220-年龄”！ROAR 精准最大心率与五区训练法
+                      </h4>
+                      <PageBadge pages="251-253" />
+                    </div>
+                    <p className="text-xs text-zinc-300 leading-relaxed">
+                      传统的“220 - 年龄”公式早已过时且不准。更精准的公式是：<strong>MHR = 211 - (0.64 × 年龄)</strong>（例如45岁女性最大心率约为 182 bpm）[P.252]。若晨起静息脉搏比平时高出 <strong>10 bpm 以上</strong>，说明尚未恢复，请果断休息 [P.253]！
+                    </p>
+                    <div className="space-y-1.5 text-xs font-mono">
+                      <div className="flex justify-between p-1.5 rounded bg-[#181B1F] text-zinc-300">
+                        <span>Zone 1 (恢复/轻松日 Recovery)</span>
+                        <span className="text-[#38BDF8]">60% – 64% MHR</span>
+                      </div>
+                      <div className="flex justify-between p-1.5 rounded bg-[#181B1F] text-zinc-300">
+                        <span>Zone 2 (有氧耐力 Aerobic Endurance)</span>
+                        <span className="text-[#38BDF8]">65% – 74% MHR</span>
+                      </div>
+                      <div className="flex justify-between p-1.5 rounded bg-[#181B1F] text-zinc-300">
+                        <span>Zone 3 (节奏有氧 Tempo)</span>
+                        <span className="text-[#38BDF8]">75% – 84% MHR</span>
+                      </div>
+                      <div className="flex justify-between p-1.5 rounded bg-[#181B1F] text-zinc-300">
+                        <span>Zone 4 (乳酸阈值/比赛配速 Threshold)</span>
+                        <span className="text-[#38BDF8]">85% – 94% MHR</span>
+                      </div>
+                      <div className="flex justify-between p-1.5 rounded bg-[#181B1F] text-zinc-300">
+                        <span>Zone 5 (最大努力 Max Effort)</span>
+                        <span className="text-[#38BDF8]">95% – 100% MHR</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 原书附录便携真食物补给食谱速览 [P.184-185, P.262-273] */}
+                  <div className="p-5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-black text-white uppercase flex items-center gap-1.5">
+                        <Utensils className="w-4 h-4 text-[#00A8E8]" />
+                        <span>Appendix · 原书便携运动真食物食谱精选</span>
+                      </h4>
+                      <PageBadge pages="184-185, 262-273" />
+                    </div>
+                    <div className="text-xs text-zinc-300 space-y-2">
+                      <div className="p-2.5 rounded bg-[#181B1F] border border-zinc-800">
+                        <strong className="text-[#38BDF8]">1. 咸味能量球 (Salty Balls) [P.184]：</strong> 1/2杯颗粒杏仁酱/花生酱 + 1/2杯糙米糖浆 (Brown rice syrup，微波加热1分钟至沸腾) + 1/2杯香草蛋白粉 + 肉桂粉 + 浓缩咖啡粉，搓成1英寸小球滚上可可粉与海盐。
+                      </div>
+                      <div className="p-2.5 rounded bg-[#181B1F] border border-zinc-800">
+                        <strong className="text-emerald-400">2. 绿女神果昔 (Green Goddess Smoothie) [P.263]：</strong> 1杯冰杏仁奶 + 2/3杯冻芒果 + 1根熟香蕉 + 3片去梗羽衣甘蓝 + 2勺无糖椰子片 + 1茶匙生亚麻籽。
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <RoarSoundBites
+              title="Part III 巅峰表现精粹"
+              page="173, 189, 201, 232, 261"
+              items={[
+                '水壶装水合 (3%–4%低渗碳水电解质饮品)，口袋装真实食物（咸味小土豆、三明治块、糙米糖浆自制能量棒），彻底告别高果糖与麦芽糊精能量胶 [P.189, P.201]。',
+                '女性训后恢复窗口极短：务必在运动后 30 分钟内摄入 25–30g 富含亮氨酸的蛋白质以阻断孕酮引发的肌肉分解並重启糖原合成 [P.185-186, P.189]。',
+                '利用冷水浸泡/降温背心帮助女性在运动后将血液从皮肤推回肌肉循环，并推迟 4–5 小时再摄入高抗氧化食物 [P.221, P.232]。',
+                '无论你有多少生物黑客传感器、尿检试纸和血检数据，最核心的黄金指标永远是问自己一句：“我今天感觉如何 (How do I feel?)” [P.260-261]！'
+              ]}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* ==========================================
+          页脚 Footer (含原书版权说明与作者 redweff 致谢)
+         ========================================== */}
+      <footer className="bg-[#0B0D0E] border-t border-zinc-800 py-12 text-zinc-400">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center sm:text-left">
+            <div className="flex items-center justify-center sm:justify-start gap-3">
+              <span className="px-2.5 py-0.5 bg-white text-[#111315] font-black tracking-[0.2em] text-sm rounded">
+                ROAR
+              </span>
+              <span className="text-sm font-bold text-white">
+                《ROAR》女性运动生理学与营养科学 · 交互式读书分享主页
+              </span>
+            </div>
+            <p className="text-xs text-zinc-500">
+              原书信息：<em>ROAR: How to Match Your Food and Fitness to Your Female Physiology for Optimum Performance, Great Health, and a Strong, Lean Body for Life</em> by Stacy T. Sims, PhD & Selene Yeager (Rodale, 2016) [P.1-2, P.291-292].
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center sm:items-end gap-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-[#00A8E8] text-white text-xs font-bold shadow-[0_0_15px_rgba(0,168,232,0.25)]">
+              <Award className="w-4 h-4 text-[#00A8E8]" />
+              <span>读书分享策展 & 交互设计：redweff</span>
+            </div>
+            <span className="text-[11px] font-mono text-zinc-500">
+              All Page Citations Mapped to Uploaded Book PDF [P.1 – P.293]
+            </span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
